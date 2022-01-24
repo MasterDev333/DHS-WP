@@ -1,0 +1,53 @@
+:root {
+  --rem-base: 10px;
+  --base-font-size: 18px;
+  --base-line-height: 1.2;
+  --vertical-rhythm: calc(var(--base-line-height) * 1em);
+  --brand-color: #E1AE2E;
+  --brand-color-dark: #aa8118;
+  --brand-color-light: #ebc871;
+  --accent-color: #E1AE2E;
+  --accent-color-dark: #aa8118;
+  --accent-color-light: #aa8118;
+  --base-text-color: #333533;
+  --base-link-color: var(--brand-color);
+  --h1-h6-color: #242423;
+  --brand-color-g-light: #e8eddf;
+  --animation-duration: 0.3s;
+  --animation-timing-function: ease;
+  --input-x: 20px;
+  --gutter: 25px;
+  --input-color: #4b4a4a;
+  --input-placeholder-color: inherit;
+  --input-bg-color: white;
+  --input-radius: 3px;
+  --input-border-color: #eee;
+  --input-focus-border-color: #cdcdcd;
+  --h1: 66px;
+  --h2: 44px;
+  --h3: 32px;
+  --h4: 26px;
+  --h5: 24px;
+  --h6: 14px;
+  --h1-mob: 40px;
+  --h2-mob: 30px;
+  --h3-mob: 26px;
+  --h4-mob: 22px;
+  --h5-mob: 18px;
+  --h6-mob: 12px;
+  --btn-y: 15px;
+  --btn-x: 20px;
+  --btn-b: 1px;
+  --btn-r: 3px;
+  --btn-fz: 14px;
+}
+@media (max-width: 768px) {
+  :root {
+    --base-font-size: 16px;
+  }
+}
+@media (min-width: 812px) and (max-height: 414px) and (orientation: landscape) {
+  :root {
+    --gutter: 50px;
+  }
+}
