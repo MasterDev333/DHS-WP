@@ -214,11 +214,7 @@ function am_add_javascript( ) {
     wp_enqueue_script('jquery');
     if( !is_admin() ) {
         $am_files = array(
-            'assets/js/jquery.main.js',
-            'assets/js/general.js'); // example: array('script1', 'script2');
-        if( is_page_template( 'page-templates/resources.php' ) ) {
-            $am_files[] = 'templates/resource/resource_ajax.js';
-        }
+            'assets/js/jquery.main.js' ); // example: array('script1', 'script2');
         foreach($am_files as $am_file){
             wp_enqueue_script('am_'.sanitize_title($am_file), get_theme_file_uri($am_file), array( 'jquery' ),filemtime( get_theme_file_path($am_file)),true );
         }
@@ -235,7 +231,6 @@ function am_add_css( ) {
     // internal CSS
     $am_files = array(
         'style.css',
-        'assets/css/swiper-bundle.min.css',
         'assets/css/root.css',
         'assets/css/style.css',
         'assets/css/style-wp.css',
@@ -245,7 +240,7 @@ function am_add_css( ) {
     }
     
     // external CSS
-    $am_links = array('https://use.typekit.net/hrv0sbm.css'); 
+    $am_links = array(); 
     foreach($am_links as $am_link){
         wp_enqueue_style('am_'.sanitize_title($am_link), $am_link,array());
     }

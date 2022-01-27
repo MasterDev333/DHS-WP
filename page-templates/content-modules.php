@@ -8,534 +8,291 @@ get_header(); ?>
 
 <?php if( have_rows( 'modules' ) ): 
     while( have_rows( 'modules' ) ): the_row(); ?>
-        <?php if( get_row_layout() == 'content_image_block' ): ?>
-            <?php 
-            $direction = get_sub_field( 'content_direction' );
-            $is_intro = get_sub_field( 'is_intro' ); 
-            $is_advice = get_sub_field( 'enable_advice_block' );
-            $is_revert = get_sub_field( 'revert_h1' );
-            $id = get_sub_field( 'id' ) ? get_sub_field( 'id' ) : 'content-image-block-' . get_row_index(); 
-            if( $direction == 'top' ) : ?>
-                <section class="section section-info <?php echo get_module_spacing(); ?>"
-                        id="<?php echo $id ?>">
-                    <div class="container">
-                        <div class="main-heading _md">
-                            <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'sub_heading', 't' => 'h3', 'tc' => 'sub-tag') ); ?>
-                            <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'heading', 't' => 'h2', 'tc' => 'h1') ); ?>
-                            <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'description', 't' => 'div') ); ?>
+    <?php if( get_row_layout() == 'post_slider_banner' ): ?>
+        <section class="pt-4 pb-25 pb-md-15 pt-lg-7 p-r text-white mh-74 mh-md-64 a-end a-lg-start hero-wrapper">
+            <?php get_template_part_args( 'templates/content-modules-image', array( 'v' => 'background', 'is' => false, 'v2x' => false, 'w' => 'div', 'wc' => 'bg-str-f bg-dark-o' ) ); ?>
+            <div class="container">
+                <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'sub_heading', 't' => 'h5' ) ); ?>
+                <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'heading', 't' => 'h1', 'tc' => 'mw-550' ) ); ?>
+                <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'content', 't' => 'p', 'tc' => 'mw-450' ) ); ?>
+            </div>
+        </section>
+        <section class="pt-01 pb-2 pb-md-5 text-white">
+            <div class="container-s mtn-22 mtn-md-15">
+                <div class="slider-wrapper">
+                    <div class="slider-left-row">
+                        <div class="slider-left-tittle">
+                            <h5 class="d-md-none"><small>from</small></h5>
+                            <h3 class="tittle-with-ico">
+                                <span class="d-md-block d-none h5">from</span> The <br> Preacher’s <br> Corner
+                            </h3>
                         </div>
-                        <?php if( $image = get_sub_field( 'image' ) ): ?>
-                        <div class="img-full">
-                            <img src="<?php echo $image['url']; ?>" width="1219" height="588" alt="">
-                        </div>
-                        <?php endif; ?>
+                        <?php get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'all_cta', 'c' => 'btn _arrow', 'w' => 'div', 'wc' => 'slider-left-btn d-md-none' ) ); ?>
                     </div>
-                </section>
-            <?php elseif( $direction == 'bottom' ): ?>
-                <section class="section section-tools bg-gray-color <?php echo get_module_spacing(); ?> pt-10 pt-md-15 pb-10 pb-md-15"
-                        id="<?php echo $id; ?>">
-                    <?php get_template_part_args( 'templates/content-modules-image', array( 'v' => 'image', 'v2x' => false, 'w' => 'div', 'wc' => 'section-tools__img' ) ); ?>
-                    <div class="container">
-                        <div class="section-tools__content">
-                            <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'sub_heading', 't' => 'h3', 'tc' => 'sub-tag') ); ?>
-                            <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'heading', 't' => 'h2', 'tc' => 'h1') ); ?>
-                            <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'description', 't' => 'div') ); ?>
-                        </div>
-                    </div>
-                </section>
-
-            <?php else: ?>
-                <section class="section section-two-tile <?php echo get_module_spacing(); ?>" 
-                        id="<?php echo $id; ?>">
-                    <div class="container">
-                        <div class="two-tile <?php echo ($direction == 'left') ? '_right' : ''; ?> <?php echo $is_intro ? '_intro' : ''; ?>">
-                            <?php get_template_part_args( 'templates/content-modules-image', array( 'v' => 'image', 'v2x' => false, 'w' => 'div', 'wc' => 'two-tile_img' ) ); ?>
-                            <div class="two-tile_content"> 
-                                <div class="two-tile_txt">
-                                    <div class="heading">
-                                        <?php 
-                                        if( $is_intro ) {
-                                            if( $is_revert ) {
-                                                $subheading_tag = 'h2';
-                                                $heading_tag = 'h1';
-                                            } else {
-                                                $subheading_tag = 'h1';
-                                                $heading_tag = 'h2';
-                                            }
-                                        } else {
-                                            $heading_tag = 'h2';
-                                            $subheading_tag = 'h3';
-                                        }
-                                        ?>
-                                        <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'sub_heading', 't' => $subheading_tag, 'tc' => 'sub-tag') ); ?>
-                                        <?php if( $is_intro ): ?> 
-                                            <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'heading', 't' => $heading_tag, 'tc' => 'h1-lg') ); ?>
-                                        <?php else: ?>
-                                            <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'heading', 't' => $heading_tag, 'tc' => 'h1') ); ?>
-                                        <?php endif; ?>
-                                        <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'description', 't' => 'div' ) ); ?>
-                                        <?php if( $is_advice ):
-                                            $advice = get_sub_field( 'advice_block' ); ?>
-                                        <div class="block-advices">
-                                            <?php if( $advice['image'] ): ?> 
-                                            <div class="block-advices_img">
-                                                <img src="<?php echo $advice['image']; ?>" width="32" height="32" alt="">
-                                            </div>
-                                            <?php endif; ?>
-                                            <?php if( $advice['content'] ) : ?>
-                                            <div class="block-advices_content">
-                                                <p><?php echo $advice['content']; ?></p>
-                                            </div>
-                                            <?php endif; ?>
+                    <div class="slider-right-row">
+                        <div class="swiper swiper-article">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="article-inner">
+                                        <ul class="article-tag-list">
+                                            <li>New</li>
+                                        </ul>
+                                        <div class="bg-str">
+                                            <img src="img/img2.jpg" alt="img" srcset="img/img2@2x.jpg 2x">
                                         </div>
-                                        <?php endif; ?>
-                                        <div class="btn-block pt-3">
-                                            <?php get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'cta', 'c' =>'btn btn-lg' ) ); ?>
+                                        <div class="article-info">
+                                            <h6>Friday October 22</h6>
+                                            <h3>Article Title</h3>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut labore et.</p>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            <?php endif; ?>
-            <style>
-                #<?php echo $id; ?> mark {
-                    background-image: url("<?php echo get_mark_image(); ?>");
-                }
-            </style>
-        <?php elseif( get_row_layout() == 'logos' ): ?>
-            <section class="section section-companies bg-gray-color py-7 <?php echo get_module_spacing(); ?>"
-                    <?php echo get_sub_field( 'id' ) ? 'id="' . get_sub_field( 'id' ) . '"' : ''; ?>>
-                <div class="container">
-                    <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'heading', 't' => 'h2', 'w' => 'div', 'wc' => 'main-heading _md') ); ?>
-                    <?php if( have_rows( 'logos' ) ): ?>
-                    <ul class="list-companies">
-                        <?php while( have_rows( 'logos' ) ): the_row(); ?> 
-                        <li>
-                            <a href="<?php the_sub_field( 'link' ); ?>">
-                                <img src="<?php the_sub_field( 'image' ); ?>" alt="">
-                            </a>
-                        </li>
-                        <?php endwhile; ?>
-                    </ul>
-                    <?php endif; ?>
-                    <div class="btn-block text-center">
-                        <?php get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'cta', 'c' =>'btn btn-lg' ) ); ?>
-                    </div>
-                </div>
-            </section>
-        <?php elseif( get_row_layout() == 'posts' ): ?>
-            <section class="section section-post <?php echo get_module_spacing(); ?>"
-                    <?php echo get_sub_field( 'id' ) ? 'id="' . get_sub_field( 'id' ) . '"' : ''; ?>>
-                <div class="container _sm">
-                    <div class="main-heading">
-                        <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'heading', 't' => 'h2', 'tc' => 'h1') ); ?>
-                        <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'description', 't' => 'p') ); ?>
-                    </div>
-                    <?php if( $related_posts = get_sub_field( 'posts' ) ): ?>
-                    <div class="swiper swiper-post-mobile">
-                        <div class="swiper-wrapper">
-                            <?php foreach( $related_posts as $related_post ): ?>
-                            <div class="swiper-slide">
-                                <div class="box-post">
-                                    <div class="box-post_img">
-                                        <a href="<?php echo get_the_permalink( $related_post ); ?>">
-                                            <img src="<?php echo get_the_post_thumbnail_url( $related_post, 'related-post-thumbnail' ); ?>" 
-                                                width="314" height="154" 
-                                                srcset="<?php echo get_the_post_thumbnail_url( $related_post, 'related-post-thumbnail-2x' ); ?> 2x"
-                                                alt="">
-                                        </a>
+                                <div class="swiper-slide">
+                                    <div class="article-inner">
+                                        <div class="bg-str">
+                                            <img src="img/img2.jpg" alt="img" srcset="img/img2@2x.jpg 2x">
+                                        </div>
+                                        <div class="article-info">
+                                            <h6>Friday October 22</h6>
+                                            <h3>Article Title Malesuada Fringilla Vulputate Tellus</h3>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut labore et.</p>
+                                        </div>
                                     </div>
-                                    <h3 class="box-post_ttl">
-                                        <a href="<?php echo get_the_permalink( $related_post ); ?>"><?php echo get_the_title( $related_post ); ?></a>
-                                    </h3>
-                                    <p>
-                                        <?php echo get_the_excerpt( $related_post ); ?>
-                                    </p>
                                 </div>
-                            </div>
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
-                    <?php endif; ?>
-                    <div class="btn-block pt-4 text-center">
-                        <?php get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'cta', 'c' =>'btn btn-lg' ) ); ?>
-                    </div>
-                </div>
-            </section>
-        
-        <?php elseif( get_row_layout() == 'supercharge' ): ?>
-            <section class="section section-supercharge bg-secondary-color py-7 py-md-12 <?php echo get_module_spacing(); ?>"
-                    <?php echo get_sub_field( 'id' ) ? 'id="' . get_sub_field( 'id' ) . '"' : ''; ?>>
-                <div class="container">
-                    <?php if( $images = get_field( 's_images', 'options' ) ): ?>
-                    <ul class="list-charge">
-                        <?php foreach( $images as $image ): ?> 
-                        <li>
-                            <img src="<?php echo $image['url']; ?>" width="103" height="103" alt="">
-                        </li>
-                        <?php endforeach; ?>
-                    </ul>
-                    <?php endif; ?>
-                    <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 's_heading', 'o' => 'o', 't' => 'h2', 'tc' => 'h1') ); ?>
-                    <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 's_description', 'o' => 'o', 't' => 'p' ) ); ?>
-                    <div class="btn-block pt-1">
-                        <?php get_template_part_args( 'templates/content-modules-cta', array( 'v' => 's_cta', 'o' => 'o', 'c' =>'btn btn-lg' ) ); ?>
-                    </div>
-                </div>
-            </section>
-
-        <?php elseif( get_row_layout() == 'heading_content' ): ?>
-            <?php $id = get_sub_field( 'id' ) ?: 'section-almost-' . get_row_index(); ?>
-			<section class="section bg-main-color text-white py-10 <?php echo get_module_spacing(); ?>" id="<?php echo $id; ?>">
-				<div class="container">
-					<div class="almost-block">
-                        <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'sub_heading', 't' => 'h3', 'tc' => 'h5') ); ?>
-                        <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'heading', 't' => 'h2', 'tc' => 'h1') ); ?>
-                        <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'description', 't' => 'p' ) ); ?>
-                        <?php get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'cta', 'c' =>'btn btn-lg mt-3' ) ); ?>
-					</div>
-				</div>
-			</section>
-            <style>
-                #<?php echo $id; ?> mark {
-                    background-image: url("<?php echo get_mark_image(); ?>");
-                }
-            </style>
-
-        <?php elseif( get_row_layout() == 'about_gallery' ): ?>
-            <?php $id = get_sub_field( 'id' ) ?: 'section-about-gallery-' . get_row_index(); ?>
-			<section class="section <?php echo get_module_spacing(); ?>"
-                    id="<?php echo $id; ?>">
-				<div class="container">
-					<div class="heading text-center">
-                        <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'heading', 't' => 'h1', 'tc' => 'h1-lg') ); ?>
-                        <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'description', 't' => 'p' ) ); ?>
-					</div>
-                    <?php if( $images = get_sub_field( 'gallery' ) ): ?>
-                        <div class="grid-about">
-                            <?php foreach( $images as $image ): ?>
-                                <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>">
-                            <?php endforeach; ?>
-                        </div>
-                    <?php endif; ?>
-				</div>
-			</section>
-            <style>
-                #<?php echo $id; ?> mark {
-                    background-image: url("<?php echo get_mark_image(); ?>");
-                }
-            </style>
-
-        <?php elseif( get_row_layout() == 'blue_banner' ): ?>
-            <?php $id = get_sub_field( 'id' ) ?: 'section-blue-banner-' . get_row_index(); ?>
-            <section class="section bg-main-color text-white py-10 <?php echo get_module_spacing(); ?>"
-                    id="<?php echo $id; ?>">
-				<div class="container">
-					<div class="block-slogan">
-                        <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'heading', 't' => 'h2', 'tc' => 'h1-md') ); ?>
-                        <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'description', 't' => 'p') ); ?>
-                        <?php if( $images = get_sub_field( 'images' ) ): ?>
-						<ul class="list-charge pt-4">
-                            <?php foreach( $images as $image ): ?>
-                                <li>
-                                    <img src="<?php echo $image['url']; ?>" width="103" height="103" alt="">
-                                </li>
-                            <?php endforeach; ?>
-						</ul>
-                        <?php endif; ?>
-					</div>
-				</div>
-			</section>
-            <style>
-                #<?php echo $id; ?> mark {
-                    background-image: url("<?php echo get_mark_image(); ?>");
-                    <?php if( get_sub_field( 'mark_type' ) == 'exclaimation_mark' ): ?>
-                        background-position: center;
-                        background-repeat: no-repeat;
-                    <?php endif; ?>
-                }
-            </style>
-
-        <?php elseif( get_row_layout() == 'two_columns_content' ): ?>
-			<section class="section <?php echo get_module_spacing(); ?>" id="<?php the_sub_field( 'id' ); ?>">
-				<div class="container">
-                    <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'heading', 't' => 'h2', 'tc' => 'h1-md mb-0') ); ?>
-					<div class="grid _row pb-5">
-                        <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'left_column', 't' => 'div', 'tc' => 'col-12 col-md-6') ); ?>
-                        <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'right_column', 't' => 'div', 'tc' => 'col-12 col-md-6') ); ?>
-					</div>
-                    <?php get_template_part_args( 'templates/content-modules-image', array( 'v' => 'image', 'is' => 'two-column-image', 'w' => 'div', 'wc'=> 'blog-img' ) ); ?>
-				</div>
-			</section>
-
-        <?php elseif( get_row_layout() == 'newsletter' ): ?>
-			<section class="section py-12 <?php echo get_module_spacing(); ?> <?php the_sub_field( 'background_color' ); ?>"
-                    id="<?php the_sub_field( 'id' ); ?>">
-                    <?php if( get_sub_field( 'style' ) == 'contact' ): ?>
-                        <div class="container">
-                            <div class="main-heading _md">
-                                <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'n_c_sub_heading', 'o' => 'o', 't' => 'span', 'tc' => 'tag', 'w' => 'div', 'wc' => 'tag-block' ) ); ?>
-                                <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'n_c_heading', 'o' => 'o', 't' => 'h2' ) ); ?>
-                                <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'n_c_description', 'o' => 'o', 't' => 'p', 'w' => 'div', 'wc' => 'text-gray txt-size-md' ) ); ?>
-                                <?php get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'n_c_cta', 'o' => 'o', 'c' => 'btn btn-lg', 'w' => 'div', 'wc' => 'btn-block' ) ); ?>
-                            </div>
-                        </div>
-                    <?php else: ?>
-                        <div class="container">
-                            <div class="block-search">
-                                <div class="main-heading _md">
-                                    <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'n_f_sub_heading', 'o' => 'o', 't' => 'span', 'tc' => 'tag', 'w' => 'div', 'wc' => 'tag-block' ) ); ?>
-                                    <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'n_f_heading', 'o' => 'o', 't' => 'h2' ) ); ?>
-                                    <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'n_f_description', 'o' => 'o', 't' => 'p', 'w' => 'div', 'wc' => 'text-gray txt-size-md' ) ); ?>
-                                </div>
-                                <?php if( $form = get_field( 'n_form', 'options' ) ): ?>
-                                    <div class="box-search">
-                                        <?php echo $form; ?>
+                                <div class="swiper-slide">
+                                    <div class="article-inner">
+                                        <div class="bg-str">
+                                            <img src="img/img2.jpg" alt="img" srcset="img/img2@2x.jpg 2x">
+                                        </div>
+                                        <div class="article-info">
+                                            <h6>Friday October 22</h6>
+                                            <h3>Article Title</h3>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut labore et.</p>
+                                        </div>
                                     </div>
-                                <?php endif; ?>
-                                <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'n_f_form_description', 'o' => 'o', 't' => 'div', 'tc' => 'text-gray txt-size-md text-center' ) ); ?>
-                            </div>
-                        </div>
-                    <?php endif; ?>
-			</section>
-
-        <?php elseif( get_row_layout() == 'integrations' ): ?>
-            <?php $sId = get_sub_field( 'id' ) ?: 'section-integrations-' . get_row_index(); ?>
-			<section class="section <?php echo get_module_spacing(); ?>"
-                    id="<?php echo $sId; ?>">
-				<div class="container">
-					<div class="heading text-center">
-                        <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'heading', 't' => 'h1', 'tc' => 'h1-lg' ) ); ?>
-                        <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'description', 't' => 'p' ) ); ?>
-					</div>
-                    <?php $args = array(
-                        'post_type' => 'integration',
-                        'post_status' => 'publish',
-                        'posts_per_page' => -1
-                    ); 
-                    $integrations = new WP_Query( $args ); 
-                    if( $integrations->have_posts() ): ?> 
-					<div class="grid _row">
-                        <?php while( $integrations->have_posts() ): $integrations->the_post(); 
-                        $pid = get_the_ID( ); ?>
-						<div class="col-12 col-md-6 col-lg-4">
-							<div class="box-tools">
-								<div class="box-tools_img">
-									<a href="<?php echo get_the_permalink( $pid ); ?>">
-										<img src="<?php echo get_the_post_thumbnail_url( $pid ); ?>" alt="">
-									</a>
-								</div>
-								<div class="box-tools_content">
-									<h3><a href="<?php echo get_the_permalink( $pid ); ?>"><?php echo get_the_title( $pid ); ?></a></h3>
-									<?php if( $excerpt = get_the_excerpt( $pid ) ): ?>
-                                        <p><?php echo $excerpt; ?></p>
-                                    <?php endif; ?>
-									<div class="btn-block">
-										<a class="btn-link" href="<?php echo get_the_permalink( $pid ); ?>">Learn More →</a>
-									</div>
-								</div>
-							</div>
-						</div>
-                        <?php endwhile; ?>
-					</div>
-                    <?php endif; 
-                    wp_reset_query(  ); ?>
-				</div>
-			</section>
-            <style>
-                #<?php echo $sId; ?> mark {
-                    background-image: url("<?php echo get_mark_image(); ?>");
-                }
-            </style>
-
-        <?php elseif( get_row_layout() == 'blockquote' ): ?>
-            <section class="section bg-gray-color py-8 <?php echo get_module_spacing(); ?>">
-				<div class="container">
-					<div class="block-testiminials">
-                        <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'text', 't' => 'p', 'w' => 'blockquote' ) ); ?>
-						<div class="testimonials-item _row _big">
-                            <?php get_template_part_args( 'templates/content-modules-image', array( 'v' => 'avatar', 't' => 'div', 'tc' => 'testimonials-item_img', 'v2x' => false ) ); ?>
-							<div class="testimonials-item_content">
-                                <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'name', 't' => 'span', 'tc' => 'testimonials-item_name' ) ); ?>
-                                <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'role', 't' => 'p' ) ); ?>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-
-        <?php elseif( get_row_layout() == 'customers' ): ?>
-            <?php $sId = get_sub_field( 'id' ) ?: 'section-customers-' . get_row_index(); ?>
-			<section class="section <?php echo get_module_spacing(); ?>"
-                    id="<?php echo $sId; ?>">
-				<div class="container">
-					<div class="heading text-center">
-                        <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'heading', 't' => 'h1', 'tc' => 'h1-lg' ) ); ?>
-                        <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'description', 't' => 'p' ) ); ?>
-					</div>
-                    <?php if( have_rows( 'images' ) ): ?>
-					<ul class="list-companies list-companies-add pt-5">
-                        <?php while( have_rows( 'images' ) ): the_row(); ?>
-						<li>
-							<a href="<?php the_sub_field( 'link' ); ?>">
-                                <img src="<?php the_sub_field( 'image' ); ?>" alt="">
-                            </a>
-						</li>
-                        <?php endwhile; ?>
-					</ul>
-                    <?php endif; ?>
-				</div>
-			</section>
-            <style>
-                #<?php echo $sId; ?> mark {
-                    background-image: url("<?php echo get_mark_image(); ?>");
-                }
-            </style>
-
-        <?php elseif( get_row_layout() == 'video_customers' ): ?>
-			<section class="section py-8">
-				<div class="container _sm">
-                    <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'heading', 't' => 'h2', 'tc' => 'h1', 'w' => 'div', 'wc' => 'main-heading _lg' ) ); ?>
-                    <?php if( have_rows( 'videos' ) ): ?>
-					<div class="grid _row">
-                        <?php while( have_rows( 'videos' ) ): the_row( ); ?>
-						<div class="col-12 col-md-6 col-lg-4">
-							<div class="box-post">
-								<div class="box-post_img">
-									<a href="#">
-                                        <?php get_template_part_args( 'templates/content-modules-image', array( 'v' => 'image', 'is' => 'video-post' ) ); ?>
-									</a>
-								</div>
-                                <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'tag', 't' => 'span', 'tc' => 'sub-tag' ) ); ?>
-								<h3 class="box-post_ttl"><a href="#"><?php the_sub_field( 'title' ); ?></a></h3>
-							</div>
-						</div>
-                        <?php endwhile; ?>
-					</div>
-                    <?php endif; ?>
-				</div>
-			</section> 
-        
-        <?php elseif( get_row_layout() == 'timer_slider' ): ?>
-            <?php $sId = get_sub_field( 'id' ) ?: 'timer-slider-' . get_row_index(); ?>
-            <section class="section timer-slider bg-main-color <?php echo get_module_spacing(); ?>" id="<?php echo $sId; ?>">
-                <div class="container">
-                    <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'heading', 't' => 'h2', 'tc' => 'timer-slider__heading' ) ); ?>
-                    <?php if( have_rows( 'slides' ) ): ?>
-                    <div class="timer-slider__inner">
-                        <div class="timer-slider__titles">
-                            <?php 
-                            while( have_rows( 'slides' ) ): the_row( ); 
-                                get_template_part_args( 'templates/content-modules-text', array( 'v' => 'title', 't' => 'div', 'tc' => 'timer-slider__title' ) ); 
-                            endwhile; ?>
-                        </div>
-                        <div class="timer-slider__images swiper">
-                            <div class="swiper-wrapper">
-                                <?php while( have_rows( 'slides' ) ): the_row( ); 
-                                    get_template_part_args( 'templates/content-modules-image', array( 'v' => 'image', 'c' => 'timer-slider__image', 'w' => 'div', 'wc' => 'swiper-slide bg-main-color', 'v2x' => false ) );
-                                endwhile; ?>
-                            </div>
-                        </div>
-                    </div>
-                    <?php endif; ?>
-                </div>
-            </section>
-            <?php $sId = get_sub_field( 'id' ) ?: 'timer-slider-' . get_row_index(); ?>
-            <section class="section timer-slider bg-main-color <?php echo get_module_spacing(); ?>" id="<?php echo $sId; ?>">
-                <div class="container">
-                    <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'heading', 't' => 'h2', 'tc' => 'timer-slider__heading' ) ); ?>
-                    <?php if( have_rows( 'slides' ) ): ?>
-                    <div class="timer-slider__inner">
-                        <div class="timer-slider__titles">
-                            <?php 
-                            while( have_rows( 'slides' ) ): the_row( ); 
-                                get_template_part_args( 'templates/content-modules-text', array( 'v' => 'title', 't' => 'div', 'tc' => 'timer-slider__title' ) ); 
-                            endwhile; ?>
-                        </div>
-                        <div class="timer-slider__images swiper">
-                            <div class="swiper-wrapper">
-                                <?php while( have_rows( 'slides' ) ): the_row( ); 
-                                    get_template_part_args( 'templates/content-modules-image', array( 'v' => 'image', 'c' => 'timer-slider__image', 'w' => 'div', 'wc' => 'swiper-slide bg-main-color', 'v2x' => false ) );
-                                endwhile; ?>
-                            </div>
-                        </div>
-                    </div>
-                    <?php endif; ?>
-                </div>
-            </section>
-            
-        <?php elseif( get_row_layout() == 'content_form'): ?>
-            <?php $sId = get_sub_field( 'id' ) ?: 'content-form-' . get_row_index(); ?>
-            <section class="section content-form <?php echo get_module_spacing(); ?>" id="<?php echo $sId; ?>">
-                <div class="container">
-                    <div class="content-form__inner">
-                        <div class="content-form__content">
-                            <div class="tag-block">
-                                <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'tag', 't' => 'span', 'tc' => 'tag' ) ); ?>
-                            </div>
-                            <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'heading', 't' => 'h1', 'tc' => 'h1 contact-heading' ) ); ?>
-                            <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'description', 't' => 'div', 'tc' => 'contact-desc' ) ); ?>
-                        </div>
-                        <div class="content-form__form">
-                            <div class="box-contact">
-                                <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'form_heading', 't' => 'h2', 'tc' => 'box-contact__title' ) ); ?>
-                                <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'form_description', 't' => 'p', 'tc' => 'box-contact__desc' ) ); ?> 
-                                <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'form', 't' => 'div', 'tc' => 'box-contact__form' ) ); ?> 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <style>
-                #<?php echo $sId; ?> mark {
-                    background-image: url("<?php echo get_mark_image(); ?>");
-                }
-            </style>
-
-        <?php elseif( get_row_layout() == 'progress_items' ): ?>
-            <?php $sId = get_sub_field( 'id' ) ?: 'progress-items-' . get_row_index(); ?>
-            <section class="progress-items__section py-12 bg-main-color <?php echo get_module_spacing(); ?>" id="<?php echo $sId; ?>">
-                <div class="container">
-                    <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'heading', 't' => 'h2', 'tc' => 'progress-items__heading' ) ); ?>
-                    <?php if( have_rows( 'items' ) ): ?>
-                    <div class="progress-items">
-                        <?php while( have_rows( 'items' ) ): the_row( ); ?>
-                            <div class="progress-item">
-                                <?php get_template_part_args( 'templates/content-modules-image', array( 'v' => 'image', 'c' => 'progress-item__img', 'v2x' => false ) ); ?>
-                                <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'text', 't' => 'p', 'tc' => 'progress-item__text' ) ); ?>
-                            </div>
-                        <?php endwhile; ?>
-                    </div>
-                    <?php endif; ?>
-                </div>
-            </section>
-
-        <?php elseif( get_row_layout() == 'feedbacks' ): ?>
-            <?php $sId = get_sub_field( 'id' ) ?: 'feedbacks-' . get_row_index(); ?>
-            <section class="feedbacks bg-gray-color py-12 <?php echo get_module_spacing(); ?>" id="<?php echo $sId; ?>">
-                <div class="container">
-                    <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'heading', 't' => 'h2', 'tc' => 'feedbacks-heading' ) ); ?>
-                    <?php if( have_rows( 'items' ) ): ?>
-                        <div class="feedback-items">
-                            <?php while( have_rows( 'items' ) ): the_row( ); ?>
-                            <div class="feedback-item">
-                                <?php get_template_part_args( 'templates/content-modules-image', array( 'v' => 'logo', 'c' => 'feedback-item__logo', 'v2x' => false ) ); ?>
-                                <div class="feedback-item__rating">
-                                    <img src="<?php echo get_template_directory_uri(  ); ?>/assets/img/rating-stars.svg" alt="">
-                                    <div class="feedback-item__rating--mask" style="width: <?php echo (100 - get_sub_field( 'rating' ) * 20); ?>%;"></div>
                                 </div>
-                                <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'title', 't' => 'h3', 'tc' => 'feedback-item__title' ) ); ?>
-                                <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'content', 't' => 'div', 'tc' => 'feedback-item__content' ) ); ?>
-                                <?php get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'link', 'c' => 'feedback-item__cta' ) ); ?>
+                                <div class="swiper-slide">
+                                    <div class="article-inner">
+                                        <div class="bg-str">
+                                            <img src="img/img2.jpg" alt="img" srcset="img/img2@2x.jpg 2x">
+                                        </div>
+                                        <div class="article-info">
+                                            <h6>Friday October 22</h6>
+                                            <h3>Article Title</h3>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut labore et.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="article-inner">
+                                        <div class="bg-str">
+                                            <img src="img/img2.jpg" alt="img" srcset="img/img2@2x.jpg 2x">
+                                        </div>
+                                        <div class="article-info">
+                                            <h6>Friday October 22</h6>
+                                            <h2>Other Title</h2>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut labore et.</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <?php endwhile; ?>
                         </div>
-                    <?php endif; ?>
+                    </div>
                 </div>
-            </section>
+            </div>
+            <div class="container">
+                <?php get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'all_cta', 'c' => 'btn _arrow', 'w' => 'div', 'wc' => 'text-right d-none d-md-block pt-2' ) ); ?>
+                <div class="swiper-btn-v1 swiper-article-btn-block d-md-none">
+                    <div class="swiper-button-prev swiper-button-prev-s1"></div>
+                    <div class="swiper-button-next swiper-button-next-s1"></div>
+                </div>
+            </div>
+        </section>
+    <?php elseif( get_row_layout() == 'media-content' ): ?>
+        <?php if( get_sub_field( 'style' ) == 'general' ): ?>
+			<section class="pt-7 pb-10 pt-md-10  pb-md-9 bg-l-gray">
+				<div class="container">
+					<div class="img-txt-grid ">
+						<div>
+							<div class="bg-str bg-over _l-b">
+								<img src="img/img5.jpg" alt="img" srcset="img/img5@2x.jpg 2x">
+							</div>
+						</div>
+						<div>
+							<h5>our story</h5>
+							<h2>Cursus Ligula Commodo Inceptos Mollis</h2>
+							<p>The Dominican House of Studies is a school of theological formation for the Dominican friars of the Province of St. Joseph. For centuries, religious and laity have been formed in the sapiential wisdom of St. Thomas Aquinas.</p>
+							<p>The life in which contemplation overflows into action images the diffusion of God’s communication of goodness to all creatures.</p>
+							<div class="img-txt-btns _a-md-end">
+								<a href="#" class="btn _arrow">Learn more</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+        <?php else: ?>
+			<section class="pt-3 pb-10 pt-md-7  pb-md-12 bgs-img ov-v">
+				<div class="container">
+					<div class="img-txt-grid _v2">
+						<div>
+							<div class="bg-str bg-over _bg-gray">
+								<img src="img/img3.jpg" alt="img" srcset="img/img3@2x.jpg 2x">
+							</div>
+						</div>
+						<div class="img-txt-grid-with-btns">
+							<div class="mb-l-0">
+								<h5>for students</h5>
+								<h2>Explore Life at the Dominican House of Studies</h2>
+								<p>Our faculty offers a rigorous theological education, always teaching our students to receive and interpret the Word of God within the scope of the theological tradition of Saint Thomas Aquinas and to preach in the power of the Spirit to turn hearts and minds to God.</p>
+							</div>
+							<div class="img-txt-grid-btns">
+								<a href="#" class="btn _arrow">PLAN YOUR VISIT</a>
+								<a href="#" class="btn _arrow">THE EXPERIENCE</a>
+								<a href="#" class="btn _arrow">APPLY TODAY</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
         <?php endif; ?>
+    <?php elseif( get_row_layout() == 'background_content' ): ?>
+        <section class="pt-14 pb-12 pt-md-12  pb-md-10 bg-gray bg-img _v1 quote-wrapper">
+            <div class="container">
+                <div class="mw-750 mx-a">
+                    <div class="mw-500">
+                        <h3><em>The human heart is animated by Truth. </em>The human being is most perfected in acts of knowledge and love. </h3>
+                    </div>
+                    <blockquote class="quote">
+                        <p>Convinced that the human heart is most fully alive when animated by the light of truth, our patron St. Dominic founded the Order of Preachers over 800 years ago to profess the truths of the Christian faith boldly for the salvation of souls.</p>
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+    <?php elseif( get_row_layout() == 'testimonial' ): ?>
+        <section class="pt-8 pb-10 py-md-12">
+            <div class="container">
+                <div class="quote-block bg-over _bg-gray _bg-md-xs">
+                    <blockquote>
+                        <p>“This is the ultimate perfection of the contemplative life, namely that the Divine truth be not only seen but also loved.”</p>
+                        <cite>STh II-II, q. 180, a. 7, ad. 1</cite>
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+    <?php elseif( get_row_layout() == 'programs' ): ?>
+        <section class="pt-18 pb-5 pt-md-7 pb-md-12 p-r text-white">
+            <div class="bg-str-f _h-36 _h-md-30 bg-dark-o">
+                <img src="img/img4.jpg" alt="img" srcset="img/img4@2x.jpg 2x">
+            </div>
+            <div class="container-s">
+                <div class="slider-wrapper">
+                    <div class="slider-left-row">
+                        <div class="slider-left-tittle">
+                            <h5>academics</h5>
+                            <h3>Our <br> Programes</h3>
+                        </div>
+                        <div class="slider-left-btn d-md-none">
+                            <a href="#" class="btn _arrow">SEE ALL</a>
+                        </div>
+                    </div>
+                    <div class="slider-right-row">
+                        <div class="swiper swiper-programm">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="swiper-programm-inner">
+                                        <div class="swiper-programm-ico">
+                                            <img src="img/img22.png" alt="img" srcset="img/img22@2x.png 2x">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="swiper-programm-inner">
+                                        <div class="swiper-programm-ico">
+                                            <img src="img/img23.png" alt="img" srcset="img/img23@2x.png 2x">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="swiper-programm-inner">
+                                        <div class="swiper-programm-ico">
+                                            <img src="img/img24.png" alt="img" srcset="img/img24@2x.png 2x">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="swiper-programm-inner">
+                                        <div class="swiper-programm-ico">
+                                            <img src="img/img25.png" alt="img" srcset="img/img25@2x.png 2x">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="swiper-programm-inner">
+                                        <div class="swiper-programm-ico">
+                                            <img src="img/img26.png" alt="img" srcset="img/img26@2x.png 2x">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="swiper-programm-inner">
+                                        <div class="swiper-programm-ico">
+                                            <img src="img/img27.png" alt="img" srcset="img/img27@2x.png 2x">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="text-right d-none d-md-block pt-2">
+                    <a href="#" class="btn _arrow">SEE ALL</a>
+                </div>
+                <div class="swiper-btn-v1 swiper-article-btn-block d-md-none">
+                    <div class="swiper-button-prev swiper-button-prev-s2"></div>
+                    <div class="swiper-button-next swiper-button-next-s2"></div>
+                </div>
+            </div>
+        </section>
+    <?php elseif( get_row_layout() == 'inline_blocks' ): ?>
+        <section class="pt-17 pb-6 py-md-10 bg-l-gray">
+            <div class="container">
+                <div class="fact-grid">
+                    <div class="fact-title">
+                        <h5>facts &amp; figures</h5>
+                        <h2>By the <br> Numbers</h2>
+                    </div>
+                    <div>
+                        <h2>4:1</h2>
+                        <p><i>Small faculty-to- <br> student ratio</i></p>
+                    </div>
+                    <div>
+                        <h2>50</h2>
+                        <p><i>Dominicans in <br> formation</i></p>
+                    </div>
+                    <div>
+                        <h2>43</h2>
+                        <p><i>Years lorem ipsum <br> dolor sit amet</i></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <?php elseif( get_row_layout() == 'full_banner' ): ?>
+        <section class="py-3 py-md-10 p-r text-white mh-58 a-center">
+            <div class="bg-str-f bg-dark-o">
+                <img src="img/img6.jpg" alt="img" srcset="img/img6@2x.jpg 2x">
+            </div>
+            <div class="container">
+                <div class="mw-550 mb-l-0">
+                    <h5>donate</h5>
+                    <h2>Support the Dominican House of Studies</h2>
+                    <p>We equip our students with a plentitude of theological wisdom and apostolic fervor so that they might share the joyful Truth of the gospel for the rest of their lives of teaching and ministry.</p>
+                    <p><a href="#" class="btn _arrow _btn-brand">Give</a></p>
+                </div>
+            </div>
+        </section>
+    <?php endif; ?> 
 <?php endwhile;
 endif; ?>
 <?php get_footer(); ?>
