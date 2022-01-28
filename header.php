@@ -15,24 +15,23 @@
 	
 <div class="wrapper">
 	<header class="page-header">
+		<?php if( have_rows( 'top_bar_links', 'options' ) ): ?>
 		<div class="header-top">
 			<div class="container">
 				<ul class="header-top-list">
-					<li><a href="#">Priory</a></li>
-					<li class="ml-a"><a href="#">ALUMNI</a></li>
-					<li><a href="#">STUDENTS</a></li>
-					<li><a href="#">FACULTY</a></li>
-					<li class="br-1"><a href="#">LIBRARY</a></li>
-					<li><a href="#">POPULI</a></li>
-					<li class="br-1"><a href="#">CONTACT</a></li>
+					<?php while( have_rows( 'top_bar_links', 'options' ) ): the_row( ); 
+						get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'link', 'w' => 'li' ) );
+					endwhile; ?>
 				</ul>
 			</div>
 		</div>
+		<?php endif; ?>
 		<div class="header-menu-wrapper">
 			<div class="container">
 				<div class="header-menu-inner">
-					<a href="#" class="logo">
-						<img src="img/logo-light.svg" alt="logo">
+					<a href="<?php echo home_url(  ); ?>" class="logo">
+						<?php $site_logo = get_field( 'logo', 'options' ) ?: get_template_directory_uri(  ) . '/assets/img/logo-new.svg'; ?>
+						<img src="<?php echo $site_logo; ?>" alt="DHS">
 					</a>
 					<div class="header-nav">
 						<div class="header-nav-holder header-mnav">
@@ -149,21 +148,20 @@
 									<i class="icon-m-search"></i>Search </button>
 							</div>
 							<div class="online bg-l-gray d-none d-md-block">
-								<span class="online-tittle">The Preacher’s Corner</span>
-								<span class="online-count">3 New</span>
+								<?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'news_heading', 'o' => 'o', 't' => 'span', 'tc' => 'online-tittle' ) ); ?>
+								<?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'news_tag', 'o' => 'o', 't' => 'span', 'tc' => 'online-count' ) ); ?>
 							</div>
 							<div class="header-btn d-none d-md-flex">
-								<a href="#" class="btn _out">Apply</a>
-								<a href="#" class="btn">Give</a>
+								<?php get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'news_apply_cta', 'o' => 'o', 'c' => 'btn _out' ) ); ?>
+								<?php get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'news_give_cta', 'o' => 'o', 'c' => 'btn' ) ); ?>
 							</div>
-							<ul class="header-top-list d-none d-md-flex">
-								<li><a href="#">ALUMNI</a></li>
-								<li><a href="#">LIBRARY</a></li>
-								<li><a href="#">STUDENTS</a></li>
-								<li><a href="#">POPULI</a></li>
-								<li><a href="#">FACULTY</a></li>
-								<li><a href="#">CONTACT</a></li>
-							</ul>
+							<?php if( have_rows( 'top_bar_links', 'options' ) ): ?>
+								<ul class="header-top-list d-none d-md-flex">
+									<?php while( have_rows( 'top_bar_links', 'options' ) ): the_row( ); 
+										get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'link', 'w' => 'li' ) );
+									endwhile; ?>
+								</ul>
+							<?php endif; ?>
 						</div>
 						<div class="header-nav-holder header-sub-mob">
 							<button class="header-search-btn-mob nav-search arrows-back"> Back </button>
@@ -182,28 +180,22 @@
 							</div>
 						</div>
 						<div class="header-mob-footer">
-							<ul class="footer-social">
-								<li>
-									<a href="#"><i class="icon-facebook"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="icon-twitter"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="icon-m-xz"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="icon-youtube"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="icon-instagram"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="icon-vimeo2"></i></a>
-								</li>
-							</ul>
+							<?php if( have_rows( 'social', 'options' ) ): ?>
+								<ul class="footer-social">
+									<?php while( have_rows( 'social', 'options' ) ): the_row();
+									if( $link = get_sub_field( 'link' ) ): ?>
+									<li>
+										<a href="<?php echo $link['url']; ?>" target="_blank">
+											<i class="icon-<?php echo $link['title']; ?>"></i>
+										</a>
+									</li>
+									<?php endif;
+									endwhile; ?>
+								</ul>
+							<?php endif; ?>
 							<div class="footer-bottom-b">
-								<span>© 2021 Dominican House of Studies. All rights reserved.</span>
+								<?php $copy = get_field( 'copy_text', 'options' ) ?: 'Dominican House of Studies. All rights reserved.'; ?>
+								<span>&copy; <?php echo date( 'Y' ); ?> <?php echo $copy; ?></span>
 							</div>
 						</div>
 						<div class="header-search-block">
@@ -236,12 +228,12 @@
 						</div>
 					</div>
 					<div class="online bg-l-gray d-md-none">
-						<span class="online-tittle">The Preacher’s Corner</span>
-						<span class="online-count">3 New</span>
+						<?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'news_heading', 'o' => 'o', 't' => 'span', 'tc' => 'online-tittle' ) ); ?>
+						<?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'news_tag', 'o' => 'o', 't' => 'span', 'tc' => 'online-count' ) ); ?>
 					</div>
 					<div class="header-btn d-md-none">
-						<a href="#" class="btn _out">Apply</a>
-						<a href="#" class="btn">Give</a>
+						<?php get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'news_apply_cta', 'o' => 'o', 'c' => 'btn _out' ) ); ?>
+						<?php get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'news_give_cta', 'o' => 'o', 'c' => 'btn' ) ); ?>
 					</div>
 					<button class="nav-opener">
 						<span class="nav-opener-ico"><span></span></span><span>Menu</span>
