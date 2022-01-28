@@ -3242,6 +3242,11 @@ div[class*=bg-str] + .container {
      object-position: center 0px;
 }
 
+.fxs-0 {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+}
+
 .header-menu-wrapper {
   color: #333533;
   padding: 20px 0;
@@ -3510,6 +3515,9 @@ s .header-top a:hover {
 .footer-info a {
   font-size: 14px;
   color: #ffffff;
+  position: relative;
+  padding-left: 35px;
+  display: block;
 }
 .footer-info a:hover {
   opacity: 0.7;
@@ -3517,6 +3525,11 @@ s .header-top a:hover {
 .footer-info a i {
   color: #E1AE2E;
   margin-right: 15px;
+  position: absolute;
+  left: 0;
+  top: calc(50% - 1px);
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
 }
 
 .footer-btns {
@@ -6175,6 +6188,9 @@ button.swiper-pagination-bullet {
     grid-gap: 20px 50px;
     grid-template-columns: 300px 1fr;
   }
+  .footer-info a {
+    padding-left: 20px;
+  }
   #content {
     padding-left: 30px;
   }
@@ -6209,19 +6225,6 @@ button.swiper-pagination-bullet {
   }
   .people-grid {
     grid-gap: 50px;
-  }
-}
-
-@media (max-width: 1279px){
-  .footer-top .container {
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-  }
-  .footer-top .container > div {
-    width: 30%;
   }
 }
 
@@ -7126,6 +7129,26 @@ html .px-lg-20 {
   .header-btn-back {
     left: 230px;
   }
+  .footer-top .container {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .footer-top .container > div {
+    width: 100%;
+  }
+  .footer-top .container > div + div {
+    margin-top: 25px;
+  }
   .main-column {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -7999,31 +8022,6 @@ html .px-md-20 {
   }
   .footer-top {
     padding: 60px 25px;
-  }
-  .footer-top .container {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-align: start;
-        -ms-flex-align: start;
-            align-items: flex-start;
-  }
-  .footer-top .container > div {
-    width: 100%;
-  }
-  .footer-top .container > div + div {
-    margin-top: 25px;
-  }
-  .footer-info a {
-    position: relative;
-    padding-left: 35px;
-    display: block;
-  }
-  .footer-info a i {
-    position: absolute;
-    left: 0;
-    top: 1px;
   }
   .footer-list-link li {
     --liY: 2px;
@@ -9262,12 +9260,6 @@ html .px-xs-20 {
             transform: translateY(-50%);
     background-color: #cfdbd5;
   }
-  .footer-info {
-    margin: 0 10px;
-  }
-  .footer-btns {
-    margin-left: 10px;
-  }
   .footer-social {
     padding-left: 30px;
     margin-left: auto;
@@ -9337,6 +9329,9 @@ html .px-xs-20 {
   .mw-for-form2 {
     max-width: calc(100% - 500px);
   }
+  .footer-info {
+    margin: 0 10px;
+  }
   .img-txt-grid-with-btns h2 {
     padding-right: 60px;
   }
@@ -9363,6 +9358,9 @@ html .px-xs-20 {
   }
   .content-grid-sidebar hr {
     max-width: calc(100% - 40px);
+  }
+  .footer-btns {
+    margin-left: 10px;
   }
   .has-mega-menu .mega-menu {
     left: 0 !important;

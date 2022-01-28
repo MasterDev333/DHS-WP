@@ -150,8 +150,6 @@ function get_nav_menu_item_children($parent_id, $nav_menu_items, $depth = true) 
     return $nav_menu_item_list;
 }
 
-
-
 // Header Menu
 function clean_header_menu( $theme_location ) {
     if (($theme_location) && ($locations = get_nav_menu_locations()) && isset($locations[$theme_location])) {
@@ -426,3 +424,4 @@ function get_mark_image( $type = 'sub' ) {
         return get_template_directory_uri(  ) . '/assets/img/decor-txt-wavy.svg';
     endif;
 }
+
