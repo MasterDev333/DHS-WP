@@ -5,6 +5,8 @@ add_image_size('testimonial', 1180, 360, true);
 add_image_size('testimonial-2x', 2360, 720, true);
 add_image_size('blog-card', 380, 270, true);
 add_image_size('blog-card-2x', 760, 540, true);
+add_image_size('program-image', 210, 140, true);
+add_image_size('program-image-2x', 420, 280, true);
 
 function wp_get_attachment( $attachment_id ) {
 
@@ -425,3 +427,22 @@ function get_mark_image( $type = 'sub' ) {
     endif;
 }
 
+// Button shortcode
+function cta_link_func( $atts ) {
+	$a = shortcode_atts( array(
+		'href' => '#',
+		'title' => '',
+		'class' => '',
+        'target'=> '',
+        'download' => ''
+	), $atts );
+    if ($a['download']) : 
+        $path_parts = pathinfo($a['href']);
+        $download = 'download="' . $path_parts['basename'] . '"';
+    endif; 
+    $class = $a['class'] ?: 'btn _arrow';
+	return '<a  href="' . $a['href'] . '" 
+                    class="' . $class . '" 
+                    target="' . $a['target'] . '" ' . $download . '>' . $a['title'] .'</a>';
+}
+add_shortcode( 'cta_link', 'cta_link_func' );

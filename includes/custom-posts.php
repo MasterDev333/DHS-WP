@@ -41,7 +41,7 @@ function custom_post_type() {
 		'label'                 => __( 'Programs', 'text_domain' ),
 		'description'           => __( 'Programs post type', 'text_domain' ),
 		'labels'                => $labels,
-		'supports'              => array( 'title' ),
+		'supports'              => array( 'title', 'custom-fields', 'page-attributes', 'thumbnail', 'excerpt' ),
 		'hierarchical'          => true,
 		'public'                => true,
 		'show_ui'               => true,

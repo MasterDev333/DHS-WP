@@ -36,9 +36,13 @@ get_header(); ?>
                                 <?php foreach( $posts as $cpost ): ?>
                                 <div class="swiper-slide">
                                     <div class="article-inner">
+                                        <?php if( $categories = get_the_category( $cpost ) ): ?> 
                                         <ul class="article-tag-list">
-                                            <li>New</li>
+                                            <?php foreach( $categories as $category ): ?>
+                                                <li><?php echo $category->name; ?></li>
+                                            <?php endforeach; ?>
                                         </ul>
+                                        <?php endif; ?>
                                         <div class="bg-str">
                                             <?php 
                                             $img_url = get_the_post_thumbnail_url( $cpost, 'blog-card' );
