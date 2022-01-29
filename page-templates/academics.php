@@ -102,7 +102,7 @@ $post_slug = $post->post_name;
                     <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'heading', 't' => 'h2' ) ); ?>
                     <div class="txt-btn-grid">
                         <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'description', 't' => 'p', 'w' => 'div' ) ); ?>
-                        <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'list_content', 't' => 'div' ) ); ?>
+                        <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'list_content', 't' => 'div', 'tc' => 'list-content' ) ); ?>
                         <div>
                             <?php get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'cta', 'c' => 'btn _arrow', 'w' => 'p' ) ); ?>
                         </div>
