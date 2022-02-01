@@ -169,12 +169,12 @@
 								<div class="header-search-btn-mob">
 									<i class="icon-m-search"></i>Search
 								</div>
-								<form action="#">
+								<form id="searchform" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 									<label class="filter-results-label">
-										<input type="text" placeholder="Search the Site...">
+										<input type="text" name="s" placeholder="Search the Site...">
 									</label>
 									<div class="header-btn">
-										<button class="btn">Search</button>
+										<button type="submit" class="btn">Search</button>
 									</div>
 								</form>
 							</div>
@@ -199,10 +199,9 @@
 							</div>
 						</div>
 						<div class="header-search-block">
-							<button class="header-search-btn">
-								<i class="icon-m-search"></i>Search </button>
-							<div class="header-search">
-								<input class="search-field" type="text" placeholder="Search the Site...">
+							<button class="header-search-btn"><i class="icon-m-search"></i>Search </button>
+							<form class="header-search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+								<input class="search-field" type="text" name="s" placeholder="Search the Site...">
 								<input type="submit" value="">
 								<div class="result-search-block">
 									<ul class="result-list">
@@ -224,7 +223,7 @@
 										</li>
 									</ul>
 								</div>
-							</div>
+							</form>
 						</div>
 					</div>
 					<div class="online bg-l-gray d-md-none">

@@ -57,7 +57,6 @@ function custom_post_type() {
 		'capability_type'       => 'post',
 		'menu_icon'				=> 'dashicons-welcome-learn-more',
 		'taxonomies'          => array( 'category' ),
-		'rewrite' => array('slug' => 'programs', 'with_front' => false)
 	);
 	register_post_type( 'programs', $args );
 	// Register People Custom Post Type

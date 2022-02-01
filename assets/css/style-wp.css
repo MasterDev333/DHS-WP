@@ -64,6 +64,7 @@
 .list-content span {
   color: #E1AE2E;
 }
+
 @media (max-width: 1024px) {
   .header-nav {
     z-index: -1;
@@ -75,4 +76,28 @@
     width: 100px;
     height: 50px;
   }
+}
+
+/* Updating old styles */
+
+.bgs-img:before {
+  pointer-events: none;
+}
+.article-inner .bg-str img {
+  transition: all .5s ease-in-out;
+}
+.article-inner:hover .bg-str img {
+  transform: translate(-50%, -50%) scale(1.05);
+}
+.swiper-programm-ico {
+  margin: 0 0 auto;
+}
+.swiper-programm-inner h4 {
+  color: #fff;
+}
+.people-grid-list h2 {
+  transition: color .3s ease-in-out;
+}
+.people-grid-list h2:hover {
+  color: var(--base-link-color);
 }
