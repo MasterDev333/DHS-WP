@@ -7,37 +7,26 @@ function my_acf_init_block_types() {
     // Check function exists.
     if( function_exists('acf_register_block_type') ) {
 
-        // register a blog image block.
+        // register a content image block.
         acf_register_block_type(array(
-            'name'              => 'blog_image',
-            'title'             => __('Blog Image'),
-            'description'       => __('A custom blog image block.'),
-            'render_template'   => 'template-parts/blocks/blog-image/blog-image.php',
-            'category'          => 'hoopla',
+            'name'              => 'content_image',
+            'title'             => __('Content Image'),
+            'description'       => __('A custom content image block.'),
+            'render_template'   => 'template-parts/blocks/content-image/content-image.php',
+            'category'          => 'dhs',
             'icon'              => 'cover-image',
-            'keywords'          => array( 'blog', 'image' ),
+            'keywords'          => array( 'content', 'image' ),
         ));
-
-        // register a blog text block.
+        
+        // register a content image block.
         acf_register_block_type(array(
-            'name'              => 'blog_text',
-            'title'             => __('Blog Text'),
-            'description'       => __('A custom blog text block.'),
-            'render_template'   => 'template-parts/blocks/blog-text/blog-text.php',
-            'category'          => 'hoopla',
-            'icon'              => 'media-text',
-            'keywords'          => array( 'blog', 'text' ),
-        ));
-
-        // register a blog form block.
-        acf_register_block_type(array(
-            'name'              => 'blog_form',
-            'title'             => __('Blog Form'),
-            'description'       => __('A custom blog form block.'),
-            'render_template'   => 'template-parts/blocks/blog-form/blog-form.php',
-            'category'          => 'hoopla',
-            'icon'              => 'forms',
-            'keywords'          => array( 'blog', 'form' ),
+            'name'              => 'content_image_alt',
+            'title'             => __('Content Image Alt'),
+            'description'       => __('A custom content image alt block.'),
+            'render_template'   => 'template-parts/blocks/content-image-alt/content-image-alt.php',
+            'category'          => 'dhs',
+            'icon'              => 'align-pull-left',
+            'keywords'          => array( 'content', 'image' ),
         ));
     }
 }
@@ -47,8 +36,8 @@ function custom_block_categories( $categories ) {
 		$categories,
 		[
 			[
-				'slug'  => 'hoopla',
-				'title' => 'Hoopla Blocks',
+				'slug'  => 'dhs',
+				'title' => 'DHS Blocks',
 			],
 		]
 	);

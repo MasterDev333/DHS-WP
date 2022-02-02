@@ -101,3 +101,7 @@
 .people-grid-list h2:hover {
   color: var(--base-link-color);
 }
+.article-info p,
+.article-info h3 {
+  color: #fff;
+}
