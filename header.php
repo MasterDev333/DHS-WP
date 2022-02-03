@@ -15,17 +15,15 @@
 	
 <div class="wrapper">
 	<header class="page-header">
-		<?php if( have_rows( 'top_bar_links', 'options' ) ): ?>
 		<div class="header-top">
 			<div class="container">
-				<ul class="header-top-list">
-					<?php while( have_rows( 'top_bar_links', 'options' ) ): the_row( ); 
-						get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'link', 'w' => 'li' ) );
-					endwhile; ?>
-				</ul>
+				<?php wp_nav_menu( array(
+					'menu' => 'Top Menu',
+					'menu_class' => 'header-top-list',
+					'container' => false,
+				) ); ?>
 			</div>
 		</div>
-		<?php endif; ?>
 		<div class="header-menu-wrapper">
 			<div class="container">
 				<div class="header-menu-inner">
@@ -38,108 +36,7 @@
 							<div class="nav-drop">
 								<nav class="nav">
 									<ul class="header-menu">
-										<li class="d-none d-lg-block home-link">
-											<a href="#">Home</a>
-										</li>
-										<li class="has-mega-menu">
-											<a href="#">About</a>
-											<ul class="mega-menu">
-												<li>
-													<div class="col">
-														<ul class="nav-main-link">
-															<li><a href="#">Mission</a></li>
-															<li><a href="#">History</a></li>
-															<li><a href="#">Campus*</a></li>
-															<li><a href="#">Staff</a></li>
-														</ul>
-														<ul class="nav-sub-link">
-															<li><a href="#">Accreditation</a></li>
-															<li><a href="#">Trustees &amp; Overseers</a></li>
-															<li><a href="#">Administration</a></li>
-															<li><a href="#">Affiliated Institutions</a></li>
-														</ul>
-													</div>
-													<div class="col">
-														<ul class="nav-big-link">
-															<li>
-																<a href="#">Plan Your Visit</a>
-																<p> Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. </p>
-															</li>
-															<li>
-																<a href="#">Contact Us</a>
-																<p> Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. </p>
-															</li>
-														</ul>
-													</div>
-												</li>
-											</ul>
-										</li>
-										<li class="has-mega-menu">
-											<a href="#">Admission</a>
-											<ul class="mega-menu">
-												<li>
-													<div class="col">
-														<ul class="nav-main-link">
-															<li><a href="#">Tuition &amp; Fees</a></li>
-															<li><a href="#">Requirements</a></li>
-															<li><a href="#">Financial Aid</a></li>
-															<li><a href="#">Housing</a></li>
-														</ul>
-														<ul class="nav-sub-link">
-															<li><a href="#">Continuing Education</a></li>
-															<li><a href="#">Make a Payment</a></li>
-														</ul>
-													</div>
-													<div class="col">
-														<ul class="nav-big-link">
-															<li>
-																<a href="#">Plan Your Visit</a>
-																<p> Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. </p>
-															</li>
-															<li>
-																<a href="#">Apply</a>
-																<p> Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. </p>
-															</li>
-														</ul>
-													</div>
-												</li>
-											</ul>
-										</li>
-										<li class="has-mega-menu">
-											<a href="#">Academics</a>
-											<ul class="mega-menu">
-												<li>
-													<div class="col">
-														<ul class="nav-main-link">
-															<li><a href="#">Degree Program</a></li>
-															<li><a href="#">Course Details</a></li>
-															<li><a href="#">Student Life</a></li>
-															<li><a href="#">Academic Calendar</a></li>
-														</ul>
-														<ul class="nav-sub-link">
-															<li><a href="#">Grades &amp; Honors</a></li>
-															<li><a href="#">The Thomistic Institute</a></li>
-															<li><a href="#">Course Schedules</a></li>
-															<li><a href="#">Course Descriptions</a></li>
-															<li><a href="#">Course Learning Objectives</a></li>
-															<li><a href="#">Booklist</a></li>
-														</ul>
-													</div>
-													<div class="col">
-														<ul class="nav-big-link">
-															<li>
-																<a href="#">Plan Your Visit</a>
-																<p> Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. </p>
-															</li>
-															<li>
-																<a href="#">Explore All Programs</a>
-																<p> Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. </p>
-															</li>
-														</ul>
-													</div>
-												</li>
-											</ul>
-										</li>
+										<?php clean_header_menu('mainmenu'); ?>
 									</ul>
 								</nav>
 							</div>

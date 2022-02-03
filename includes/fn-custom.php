@@ -171,14 +171,7 @@ function clean_header_menu( $theme_location ) {
             $title = $menu_item->title;
             $id = get_post_meta( $menu_item->ID, '_menu_item_object_id', true );
 
-            $menu_icon = get_field( 'icon', $id );
-            $cols = get_field( 'column_count', $id );
             $is_wrapper = get_field( 'is_wrapper', $id );
-            $is_heading = get_field( 'is_heading', $id );
-            $is_text = get_field( 'is_text', $id );
-
-            $menu_icon_url = $menu_icon['url'];
-            $menu_icon_alt = $menu_icon['alt'];
 
             $class_names = $value = '';
 
@@ -204,63 +197,40 @@ function clean_header_menu( $theme_location ) {
             if ($parent_id == $menu_item->menu_item_parent) {
                 $level_2_menu_id = $menu_item->ID;
                 if( $is_wrapper ) {
-                    $menu_list .= '<div class="col ' . join( ' ', $menu_item->classes ) . '">';
+                    $menu_list .= '<div class="' . join( ' ', $menu_item->classes ) . '">';
                     $level_2_childrens = get_nav_menu_item_children($level_2_menu_id, $menu_items);
                     $level_3_submenu = false;
                     if ( $level_2_childrens ) {
-                        if( in_array( 'col-sub', $menu_item->classes ) ) {
-                            $menu_list .= '<ul class="sub-menu">';
-                        }
                         foreach ($level_2_childrens as $level_3_single_menu) {
                             if ( $level_2_menu_id == $level_3_single_menu->menu_item_parent ) {
-                                // Is heading
-                                if( get_field( 'is_heading', $level_3_single_menu->ID ) ) {
-                                    $menu_list .= '<h3>' . $level_3_single_menu->title . '</h3>';
-                                } 
-                                // Is text
-                                elseif( get_field( 'is_text', $level_3_single_menu->ID ) ) {
-                                    $menu_list .= '<p>' . $level_3_single_menu->title . '</p>';
-                                }
-                                // Is button
-                                elseif( get_field( 'is_button', $level_3_single_menu->ID ) ) {
-                                    $menu_list .= '<div class="btn-block"><a href="' . $level_3_single_menu->url . '" class="' . join( ' ', $level_3_single_menu->classes ) . '">' . $level_3_single_menu->title . '</a></div>';
-                                } 
-                                else {
+                                if( !get_field( 'is_wrapper', $level_2_menu_id ) ) {
                                     $menu_list .= '<li><a href="' . $level_3_single_menu->url . '" class="' . join( ' ', $level_3_single_menu->classes ) . '">';
-                                    if( $icon = get_field( 'icon', $level_3_single_menu->ID ) ) {
-                                        $menu_list .= '<i class="ico"><img src="' . $icon['url'] . '" width="24" height="24" alt="' . $icon['alt'] . '"></i>';
-                                    }
                                     $menu_list .= $level_3_single_menu->title . '</a>';
+                                }
+                                
+                                $level_3_menu_id = $level_3_single_menu->ID;
+                                $level_3_childrens = get_nav_menu_item_children($level_3_menu_id, $menu_items);
 
-                                    $level_3_menu_id = $level_3_single_menu->ID;
-                                    $level_3_childrens = get_nav_menu_item_children($level_3_menu_id, $menu_items);
-
-                                    if ( $level_3_childrens ) {
-                                        $menu_list .= '<ul>';
-                                        foreach ($level_3_childrens as $level_4_single_menu) {
-                                            $menu_list .= '<li><a href="' . $level_4_single_menu->url . '" class="' . join(' ', $level_4_single_menu->classes) . '">';
-                                            if ($icon = get_field('icon', $level_4_single_menu->ID)) {
-                                                $menu_list .= '<i class="ico"><img src="'. $icon['url'] .'" width="24" height="24" alt="'. $icon['alt'] .'" /></i>';
-                                            }
-                                            $menu_list .= $level_4_single_menu->title . '</a></li>';
-                                        }
-                                        $menu_list .= '</ul>';
+                                if ( $level_3_childrens ) {
+                                    $menu_list .= '<ul class="' . join( ' ', $level_3_single_menu->classes ) . '">';
+                                    foreach ($level_3_childrens as $level_4_single_menu) {
+                                        $menu_list .= '<li><a href="' . $level_4_single_menu->url . '" class="' . join(' ', $level_4_single_menu->classes) . '">';
+                                        $menu_list .= $level_4_single_menu->title . '</a>';
+                                        if( $level_4_single_menu->description ) {
+                                            $menu_list .= '<p>' . $level_4_single_menu->description . '</p>';
+                                        } 
+                                        $menu_list .= '</li>';
                                     }
+                                    $menu_list .= '</ul>';
+                                }
+                                if( !get_field( 'is_wrapper', $level_2_menu_id ) ) {
                                     $menu_list .= '</li>';
                                 }
                             }
                         }
-                        if( in_array( 'col-sub', $menu_item->classes ) ) {
-                            $menu_list .= '</ul>';
-                        }
                     } 
                     $menu_list .= '</div>';
                 } else {
-                    $menu_list .= '<li><a href="' . $link . '">';
-                    if( $menu_icon ) {
-                        $menu_list .= '<i class="icon"><img src="' . $menu_icon_url . '" alt="' . $menu_icon_alt . '" width="24" height="24" /></i>';
-                    }
-                    $menu_list .= '</a></li>';
                 }
             } 
 
@@ -315,9 +285,9 @@ function clean_footer_menu($theme_location) {
             if (!$menu_item->menu_item_parent) {
                 $parent_id = $menu_item->ID;
 
-                $menu_list .= '<div class="footer-col">' . "\n";
+                $menu_list .= '<div>' . "\n";
 
-                $menu_list .= '<span class="footer-col_title">' . $title . '</span>' . "\n";
+                $menu_list .= '<h6>' . $title . '</h6>' . "\n";
 
             }
 
@@ -326,7 +296,7 @@ function clean_footer_menu($theme_location) {
                 if (!$submenu) {
                     $submenu = true;
 
-                    $menu_list .= '<ul class="footer-col_nav">' . "\n";
+                    $menu_list .= '<ul class="footer-list-link">' . "\n";
                 }
 
                 $menu_list .= '<li><a href="'. $link .'" class="' . $class_names . '">'. $title .'</a></li>' . "\n";

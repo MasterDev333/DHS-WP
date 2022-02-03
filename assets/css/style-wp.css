@@ -105,3 +105,6 @@
 .article-info h3 {
   color: #fff;
 }
+.nav a.has-submenu:after {
+  bottom: -30px;
+}
