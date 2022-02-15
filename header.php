@@ -66,9 +66,9 @@
 								<div class="header-search-btn-mob">
 									<i class="icon-m-search"></i>Search
 								</div>
-								<form id="searchform" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+								<form id="searchform" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>" autocomplete="off">
 									<label class="filter-results-label">
-										<input type="text" name="s" placeholder="Search the Site...">
+										<input class="search-field" type="text" name="s" placeholder="Search the Site..." autocomplete="off">
 									</label>
 									<div class="header-btn">
 										<button type="submit" class="btn">Search</button>
@@ -97,27 +97,12 @@
 						</div>
 						<div class="header-search-block">
 							<button class="header-search-btn"><i class="icon-m-search"></i>Search </button>
-							<form class="header-search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-								<input class="search-field" type="text" name="s" placeholder="Search the Site...">
+							<form class="header-search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>" autocomplete="off">
+								<input class="search-field" type="text" name="s" placeholder="Search the Site..." autocomplete="off">
 								<input type="submit" value="">
 								<div class="result-search-block">
 									<ul class="result-list">
-										<li>
-											<span class="result-title"><a href="#">Search <mark>Result</mark> Page Title</a></span>
-											<p> Nullam id dolor id nibh ultricies vehicula ut id elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. </p>
-										</li>
-										<li>
-											<span class="result-title"><a href="#">Search <mark>Result</mark> Page Title</a></span>
-											<p> Nullam id dolor id nibh ultricies vehicula ut id elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. </p>
-										</li>
-										<li>
-											<span class="result-title"><a href="#">Search <mark>Result</mark> Page Title</a></span>
-											<p> Nullam id dolor id nibh ultricies vehicula ut id elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. </p>
-										</li>
-										<li>
-											<span class="result-title"><a href="#">Search <mark>Result</mark> Page Title</a></span>
-											<p> Nullam id dolor id nibh ultricies vehicula ut id elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. </p>
-										</li>
+										<!-- Dynamic search -->
 									</ul>
 								</div>
 							</form>

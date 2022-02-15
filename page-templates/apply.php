@@ -17,62 +17,7 @@ global $post;
         </div>
     </div>
 </section>
-<section class="section-submit">
-    <div class="container">
-        <div class="block-submit">
-            <div class="block-submit-top">
-                <div class="block-submit_title">
-                    <h3>Apply for Next Semester</h3>
-                    <p>Apply Before January 31, 2021</p>
-                </div>
-                <div class="calendar-item">
-                    <span class="calendar-item-title">Start Date</span>
-                    <div class="calendar-item-content">
-                        <span class="dates">04</span>
-                        <span class="dates num">21</span>
-                    </div>
-                </div>
-            </div>
-            <div class="block-submit-content">
-                <div class="block-submit_head">
-                    <p>Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. </p>
-                </div>
-                <form class="form-submit" action="#">
-                    <div class="form-item form-item-black">
-                        <label class="filter-results-label">
-                            <span>Your Name</span>
-                            <input type="text" placeholder="John Smith">
-                        </label>
-                    </div>
-                    <div class="form-item form-item-black">
-                        <label class="filter-results-label">
-                            <span>Email</span>
-                            <input type="email" placeholder="joohn.smith@gmail.com">
-                        </label>
-                    </div>
-                    <div class="form-item form-item-black">
-                        <label class="filter-results-label">
-                            <span>Phone</span>
-                            <input type="tel" placeholder="(555) 333-4445">
-                        </label>
-                    </div>
-                    <div class="form-item form-item-black">
-                        <label class="filter-tags-label">
-                            <span>Program Choice</span>
-                            <select>
-                                <option>Select One</option>
-                                <option>Select Two</option>
-                            </select>
-                        </label>
-                    </div>
-                    <div class="form-item text-center">
-                        <button class="btn btn-md btn-yellow _arrow">Submit</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
+<?php get_template_part( 'templates/content', 'form' ); ?>
 <section class="bg-l-gray d-md-none">
     <div class="container">
         <ul class="pagination-list">

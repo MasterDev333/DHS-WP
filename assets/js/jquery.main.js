@@ -10,6 +10,7 @@ jQuery(function () {
 	initCustomForms();
 	initAnchors();
 	initSearch();
+	initBlog();
 });
 
 //-------- -------- -------- --------
@@ -171,10 +172,61 @@ function initSearch() {
 		var $this = $(this),
 			val = $this.val();
 		if (val.length >= 1) {
-			jQuery('.result-search-block').show(10);
+			$.ajax({
+				url: ajaxurl,
+				type: "POST",
+				data: {
+					action: 'ajax_search',
+					keyword: val
+				},
+				success: function(data) {
+					$('.result-list').html( data );
+				},
+				complete: function() {
+					jQuery('.result-search-block').show(10);
+				}
+			})
+
 		} else {
 			jQuery('.result-search-block').hide(10);
 		}
+	});
+}
+
+function ajaxPosts() {
+	let s = $('#blog-search').val();
+	let tag = $('#blog-tags').val();
+	let $parent = $('#blog-grid');
+    $.ajax({
+		url: ajaxurl,
+		type: "POST",
+		data: {
+		  action: "loadAjaxPosts",
+		  s,
+		  tag
+		},
+		beforeSend: function() {
+			$parent.html(
+				'<div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>'
+			);
+		},
+		success: function(res) {
+		  let json = $.parseJSON(res);
+		  $('.lds-roller').remove();
+		  let strHTML = json.output;
+		  $parent.append(strHTML);
+		},
+		complete: function() {
+  
+		}
+	});
+}
+function initBlog() {
+	$('.blog-search').on('click', function() {
+		ajaxPosts();
+	});
+	$('#blog-tags').on('change', function() {
+		ajaxPosts();
 	});
 }
 

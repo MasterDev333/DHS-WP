@@ -97,6 +97,7 @@ $name = get_field( 'name' ); ?>
         </div>
     </div>
 </section>
+<?php if( $contact = get_field( 'contact_form' ) ): ?>
 <section class="pt-7 pb-12">
     <div class="container">
         <div class="peoples-grid">
@@ -105,46 +106,11 @@ $name = get_field( 'name' ); ?>
             </div>
             <div>
                 <div class="peoples-form bg-l-gray">
-                    <form>
-                        <div class="f-row">
-                            <div class="col">
-                                <label>
-                                    <span>Your Name</span>
-                                    <input type="text" placeholder="John Smith">
-                                </label>
-                            </div>
-                            <div class="col">
-                                <label>
-                                    <span>Your Email</span>
-                                    <input type="email" placeholder="John Smith">
-                                </label>
-                            </div>
-                        </div>
-                        <div class="f-row">
-                            <div class="col">
-                                <label>
-                                    <span>Subject</span>
-                                    <input type="text" placeholder="Subject of Your Message">
-                                </label>
-                            </div>
-                        </div>
-                        <div class="f-row">
-                            <div class="col">
-                                <label>
-                                    <span>Message</span>
-                                    <textarea placeholder="Your message here..."></textarea>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="f-row">
-                            <div class="col">
-                                <input type="submit" value="send">
-                            </div>
-                        </div>
-                    </form>
+                    <?php echo do_shortcode( $contact ); ?>
                 </div>
             </div>
         </div>
     </div>
 </section>
+<?php endif; ?>
 <?php get_footer(); ?>

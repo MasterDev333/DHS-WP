@@ -416,3 +416,98 @@ function cta_link_func( $atts ) {
                     target="' . $a['target'] . '" ' . $download . '>' . $a['title'] .'</a>';
 }
 add_shortcode( 'cta_link', 'cta_link_func' );
+
+
+
+// Ajax Post
+add_action('wp_ajax_loadAjaxPosts', 'loadAjaxPosts_handler');
+add_action('wp_ajax_nopriv_loadAjaxPosts', 'loadAjaxPosts_handler');
+
+function loadAjaxPosts_handler() {
+	$args = array(
+		'post_type' => 'post',
+		'post_status' => 'publish',
+        'tag' => $_POST['tag'],
+        's' => $_POST['s']
+	);
+	$query = new WP_Query( $args );
+	if( $query->have_posts( ) ):
+		ob_start(); 
+		while( $query->have_posts( ) ): $query->the_post( ); 
+			get_template_part( 'templates/loop', 'post' );
+		endwhile;
+	else: ?>
+	<div class="no-results">No Posts found.</div>
+	<?php endif;
+	wp_reset_query(  );
+	$res->output = ob_get_clean();
+	
+    $res->has_more_pages = false;
+    if ($query->max_num_pages > ( $page + 1 )) {
+        $res->page = $page + 1;
+        $res->has_more_pages = true;
+    }
+	
+	echo json_encode($res);
+	die;
+}
+
+// Ajax Search
+add_action('wp_ajax_ajax_search' , 'ajax_search');
+add_action('wp_ajax_nopriv_ajax_search','ajax_search');
+function ajax_search(){
+
+    $the_query = new WP_Query( array( 'posts_per_page' => -1, 's' => esc_attr( $_POST['keyword'] ), 'post_type' => 'post' ) );
+    if( $the_query->have_posts() ) :
+        while( $the_query->have_posts() ): $the_query->the_post(); ?>
+            <li>
+                <span class="result-title">
+                    <a href="<?php echo esc_url( post_permalink(  ) ); ?>">
+                        <?php 
+                        $title = strtolower(get_the_title(  ));
+                        $search = strtolower( $_POST['keyword'] );
+                        $replace = '<mark>' . $search . '</mark>';
+                        echo str_replace( $search, $replace, $title ); ?>
+                    </a>
+                </span>
+                <p><?php echo get_the_excerpt( ); ?></p>
+            </li>
+        <?php endwhile;
+        wp_reset_postdata();  
+    else:  ?>
+        <li><spasn class="result-title">No results found</spasn></li>
+    <?php endif;
+
+    die();
+}
+
+/**
+ * Search SQL filter for matching against post title only.
+ *
+ * @link    http://wordpress.stackexchange.com/a/11826/1685
+ *
+ * @param   string      $search
+ * @param   WP_Query    $wp_query
+ */
+function wpse_11826_search_by_title( $search, $wp_query ) {
+    if ( ! empty( $search ) && ! empty( $wp_query->query_vars['search_terms'] ) ) {
+        global $wpdb;
+
+        $q = $wp_query->query_vars;
+        $n = ! empty( $q['exact'] ) ? '' : '%';
+
+        $search = array();
+
+        foreach ( ( array ) $q['search_terms'] as $term )
+            $search[] = $wpdb->prepare( "$wpdb->posts.post_title LIKE %s", $n . $wpdb->esc_like( $term ) . $n );
+
+        if ( ! is_user_logged_in() )
+            $search[] = "$wpdb->posts.post_password = ''";
+
+        $search = ' AND ' . implode( ' AND ', $search );
+    }
+
+    return $search;
+}
+
+add_filter( 'posts_search', 'wpse_11826_search_by_title', 10, 2 );
