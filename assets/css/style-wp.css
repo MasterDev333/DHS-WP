@@ -290,3 +290,23 @@
 .result-search-block .result-list .result-title {
   text-transform: capitalize;
 }
+
+.img-txt-grid-with-btns:only-child {
+  grid-column: 1/3;
+}
+.img-txt-grid-content:only-child {
+  grid-column: 1/3;
+}
+.img-txt-grid > div .img-txt-grid-content:only-child p {
+  max-width: none;
+}
+.img-txt-grid-with-btns ul,
+.img-txt-grid-with-btns ol {
+  padding-left: 20px;
+}
+.img-txt-grid-with-btns ul li {
+  list-style: disc
+}
+.img-txt-grid-with-btns ol li {
+  list-style: decimal
+}

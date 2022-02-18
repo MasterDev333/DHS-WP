@@ -149,13 +149,18 @@ get_header(); ?>
             </section>
         <?php endif; ?>
     <?php elseif( get_row_layout() == 'media_content' ): ?>
+        <?php 
+        $style = get_sub_field( 'color' ) ? 'color: ' . get_sub_field( 'color' ) . ';' : '';
+        $style .= get_sub_field( 'background' ) ? 'background-color: ' . get_sub_field( 'background' ) . ';' : ''; ?>
         <?php if( get_sub_field( 'style' ) == 'general' ): ?>
-			<section class="pt-7 pb-10 pt-md-10  pb-md-9 bg-l-gray">
+			<section class="pt-7 pb-10 pt-md-10  pb-md-9 bg-l-gray" style="<?php echo $style; ?>">
 				<div class="container">
 					<div class="img-txt-grid ">
-						<div>
-                            <?php get_template_part_args( 'templates/content-modules-image', array( 'v' => 'image', 'w' => 'div', 'wc' => 'bg-str bg-over _l-b' ) ); ?>
-						</div>
+                        <?php if( get_sub_field( 'image' ) ): ?>
+                            <div>
+                                <?php get_template_part_args( 'templates/content-modules-image', array( 'v' => 'image', 'w' => 'div', 'wc' => 'bg-str bg-over _l-b' ) ); ?>
+                            </div>
+                        <?php endif; ?>
 						<div>
                             <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'sub_heading', 't' => 'h5' ) ); ?>
                             <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'heading', 't' => 'h2' ) ); ?>
@@ -178,14 +183,16 @@ get_header(); ?>
 				</div>
 			</section>
         <?php else: ?>
-			<section class="pt-3 pb-10 pt-md-7  pb-md-12 bgs-img ov-v">
+			<section class="pt-3 pb-10 pt-md-7  pb-md-12 bgs-img ov-v" style="<?php echo $style; ?>">
 				<div class="container">
 					<div class="img-txt-grid _v2">
-						<div>
-                            <?php get_template_part_args( 'templates/content-modules-image', array( 'v' => 'image', 'w' => 'div', 'wc' => 'bg-str bg-over _bg-gray' ) ); ?>
-						</div>
+                        <?php if( get_sub_field( 'image' ) ): ?>
+                            <div>
+                                <?php get_template_part_args( 'templates/content-modules-image', array( 'v' => 'image', 'w' => 'div', 'wc' => 'bg-str bg-over _bg-gray' ) ); ?>
+                            </div>
+                        <?php endif; ?>
 						<div class="img-txt-grid-with-btns">
-							<div class="mb-l-0">
+							<div class="mb-l-0 img-txt-grid-content">
                                 <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'sub_heading', 't' => 'h5' ) ); ?>
                                 <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'heading', 't' => 'h2' ) ); ?>
                                 <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'content', 't' => 'div' ) ); ?>
@@ -310,8 +317,8 @@ get_header(); ?>
                 <div class="block-submit _donation">
                     <h3>Make a Donation</h3>
                     <div class="donation-wrapper">
-                        <h4><span class="pr-2">With PayPal:</span> <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/none-btn_donateCC_LG.gif" alt="donate" width="100"></a></h4>
-                        <hr class="my-3">
+                        <!-- <h4><span class="pr-2">With PayPal:</span> <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/none-btn_donateCC_LG.gif" alt="donate" width="100"></a></h4>
+                        <hr class="my-3"> -->
                         <h4>With Credit Card:</h4>
                         <script src="https://donorbox.org/widget.js" ;="" paypalexpress="false"></script>
                         <iframe id="iframeName" loading="lazy" src="https://donorbox.org/embed/website-donations-201" ;="" name="donorbox" allowpaymentrequest="allowpaymentrequest" seamless="seamless" frameborder="0" scrolling="no" height="" width="100%"></iframe>
