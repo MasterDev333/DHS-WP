@@ -7,7 +7,11 @@ Template Post Type: page
 get_header(); ?>
 <?php if( get_field( 'enable_section' ) ) : ?>
 <section class="py-5 pt-lg-7 pb-lg-12 p-r text-white a-center mh-50 hero-wrapper">
-    <?php get_template_part_args( 'templates/content-modules-image', array( 'v' => 'background', 'o' => 'f', 'w' => 'div', 'wc' => 'bg-str-f bg-dark-o' ) ); ?>
+    <?php if( get_sub_field( 'video' ) ): ?>
+        <?php get_template_part_args( 'templates/content-modules-image', array( 'v' => 'background', 'o' => 'f', 'w' => 'div', 'wc' => 'bg-str-f bg-dark-o' ) ); ?>
+    <?php else: ?> 
+        <?php get_template_part_args( 'templates/content-modules-video', array( 'v' => 'video', 'o' => 'f', 'w' => 'div', 'wc' => 'bg-str-f bg-dark-o' ) ); ?>
+    <?php endif; ?>
     <div class="container">
         <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'sub_heading', 'o' => 'f', 't' => 'h5' ) ); ?>
         <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'heading', 'o' => 'f', 't' => 'h1', 'tc' => 'mw-700' ) ); ?>
@@ -20,7 +24,11 @@ get_header(); ?>
     <?php if( get_row_layout() == 'post_slider_banner' ): ?>
         <?php if( get_sub_field( 'style' ) == 'light' ): ?>
             <section class="pt-4 pb-25 pb-md-15 pt-lg-7 p-r text-white mh-74 mh-md-64 a-end a-lg-start hero-wrapper">
-                <?php get_template_part_args( 'templates/content-modules-image', array( 'v' => 'background', 'is' => false, 'v2x' => false, 'w' => 'div', 'wc' => 'bg-str-f bg-dark-o' ) ); ?>
+                <?php if( get_sub_field( 'video' ) ): ?>
+                    <?php get_template_part_args( 'templates/content-modules-video', array( 'v' => 'video', 'w' => 'div', 'wc' => 'bg-str-f bg-dark-o' ) ); ?>
+                <?php else: ?>
+                    <?php get_template_part_args( 'templates/content-modules-image', array( 'v' => 'background', 'is' => false, 'v2x' => false, 'w' => 'div', 'wc' => 'bg-str-f bg-dark-o' ) ); ?>
+                <?php endif; ?>
                 <div class="container">
                     <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'sub_heading', 't' => 'h5' ) ); ?>
                     <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'heading', 't' => 'h1', 'tc' => 'mw-550' ) ); ?>
@@ -34,7 +42,12 @@ get_header(); ?>
                             <div class="slider-left-tittle">
                                 <h5 class="d-md-none"><small>from</small></h5>
                                 <h3 class="tittle-with-ico">
-                                    <span class="d-md-block d-none h5">from</span> The <br> Preacher’s <br> Corner
+                                    <?php if( $subheading = get_sub_field( 'post_banner_subheading', 'options' ) ): ?>
+                                        <span class="d-md-block d-none h5"><?php echo $subheading; ?></span>
+                                    <?php endif; ?>
+                                    <?php if( $heading = get_sub_field( 'post_banner_heading', 'options' ) ): ?>
+                                        <?php echo $heading; ?>
+                                     <?php endif; ?>
                                 </h3>
                             </div>
                             <?php get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'all_cta', 'c' => 'btn _arrow', 'w' => 'div', 'wc' => 'slider-left-btn d-md-none' ) ); ?>
@@ -92,9 +105,14 @@ get_header(); ?>
                     <div class="slider-wrapper">
                         <div class="slider-left-row">
                             <div class="slider-left-tittle">
-                                <h5 class="d-md-none"><small>from</small></h5>
+                                <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'post_banner_subheading', 'o' => 'o', 't' => 'small', 'w' => 'h5', 'wc' => 'd-md-none' ) ); ?>
                                 <h3 class="tittle-with-ico">
-                                    <span class="d-md-block d-none h5">from</span> The <br> Preacher’s <br> Corner
+                                    <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'post_banner_subheading', 'o' => 'o', 't' => 'span', 'tc' => 'd-md-block d-none h5' ) ); ?>
+                                    <?php 
+                                    if( $heading = get_sub_field( 'post_banner_heading' ) ): 
+                                        echo $heading;
+                                    endif;
+                                    ?>
                                 </h3>
                             </div>
                             <?php get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'all_cta', 'c' => 'btn _arrow', 'w' => 'div', 'wc' => 'slider-left-btn d-md-none' ) ); ?>
@@ -217,6 +235,7 @@ get_header(); ?>
         <?php endif; ?>
     <?php elseif( get_row_layout() == 'background_content' ): ?>
         <section class="pt-14 pb-12 pt-md-12  pb-md-10 bg-gray bg-img _v1 quote-wrapper">
+            <?php get_template_part_args( 'templates/content-modules-video', array( 'v' => 'video', 'c' => 'background-content__video' ) ); ?>
             <div class="container">
                 <div class="mw-750 mx-a">
                     <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'heading', 'w' => 'div', 'wc' => 'mw-500', 't' => 'h3' ) ); ?>
@@ -300,7 +319,11 @@ get_header(); ?>
         </section>
     <?php elseif( get_row_layout() == 'full_banner' ): ?>
         <section class="py-3 py-md-10 p-r text-white mh-58 a-center">
-            <?php get_template_part_args( 'templates/content-modules-image', array( 'v' => 'background', 'w' => 'div', 'wc' => 'bg-str-f bg-dark-o', 'is' => false, 'v2x' => false ) ); ?>
+            <?php if( get_sub_field( 'background' ) ): ?>
+                <?php get_template_part_args( 'templates/content-modules-video', array( 'v' => 'video', 'w' => 'div', 'wc' => 'bg-str-f bg-dark-o' ) ); ?>
+            <?php else: ?>
+                <?php get_template_part_args( 'templates/content-modules-image', array( 'v' => 'background', 'w' => 'div', 'wc' => 'bg-str-f bg-dark-o', 'is' => false, 'v2x' => false ) ); ?>
+            <?php endif; ?>
             <div class="container">
                 <div class="mw-550 mb-l-0">
                     <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'sub_heading', 't' => 'h5' ) ); ?>

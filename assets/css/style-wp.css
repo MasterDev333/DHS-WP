@@ -300,13 +300,13 @@
 .img-txt-grid > div .img-txt-grid-content:only-child p {
   max-width: none;
 }
-.img-txt-grid-with-btns ul,
-.img-txt-grid-with-btns ol {
+.img-txt-grid ul,
+.img-txt-grid ol {
   padding-left: 20px;
 }
-.img-txt-grid-with-btns ul li {
+.img-txt-grid ul li {
   list-style: disc
 }
-.img-txt-grid-with-btns ol li {
+.img-txt-grid ol li {
   list-style: decimal
 }

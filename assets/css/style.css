@@ -3224,10 +3224,11 @@ div[class*=bg-str] + .container {
   position: absolute;
   top: -100px;
   left: calc(50% + 140px);
-  background-image: url("../img/blog-bg.png");
+  background-image: url("../img/DHS_Primary Seal.svg");
   background-repeat: no-repeat;
   background-size: cover;
   z-index: 0;
+  opacity: 0.05;
 }
 .bgs-img._bgs-v2:before {
   top: 400px;
