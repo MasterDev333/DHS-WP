@@ -9,7 +9,7 @@ $name = get_field( 'name' ); ?>
         <ul class="pagination-list">
             <li><a href="<?php echo home_url(); ?>">Home</a></li>
             <li><a href="<?php echo home_url( 'people' ); ?>">People</a></li>
-            <li><a href="<?php echo get_permalink( $post ); ?>"><?php echo get_the_title( $post ); ?></a></li>
+            <li><?php echo get_the_title( $post ); ?></li>
         </ul>
     </div>
 </section>

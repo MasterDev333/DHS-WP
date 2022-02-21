@@ -21,10 +21,10 @@ global $post; ?>
 <?php if( have_rows( 'module' ) ): 
     while( have_rows( 'module' ) ): the_row(); ?>
     <?php if( get_row_layout() == 'visit_info' ): ?>
-        <section class="pt-9 pt-md-5 bgs-img ov-v">
+        <section class="py-9 py-md-5 ov-v<?php echo get_sub_field( 'enable_background' ) ? ' bgs-img' : ''; ?>">
             <div class="container">
                 <div class="mw-for-form">
-                    <div class="mw-600 mbn-9 pl-10 pl-lg-0">
+                    <div class="mw-600 pl-10 pl-lg-0">
                         <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'sub_heading', 't' => 'h5' ) ); ?>
                         <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'heading', 't' => 'h2' ) ); ?>
                         <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'content', 't' => 'p' ) ); ?>

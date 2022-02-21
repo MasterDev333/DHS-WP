@@ -18,7 +18,7 @@ global $post;
         <ul class="pagination-list">
             <li><a href="<?php echo home_url(); ?>">Home</a></li>
             <li><a href="<?php echo home_url( '/academics' ); ?>">Academics</a></li>
-            <li><a href="<?php echo get_the_permalink( $post ); ?>"><?php echo get_the_title( $post ); ?></a></li>
+            <li><?php echo get_the_title( $post ); ?></li>
         </ul>
     </div>
 </section>
