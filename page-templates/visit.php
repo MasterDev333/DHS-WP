@@ -15,15 +15,9 @@ global $post; ?>
     </div>
 </section>
 <?php get_template_part( 'templates/content', 'form' ); ?>
-<section class="bg-l-gray d-md-none">
-    <div class="container">
-        <ul class="pagination-list">
-            <li><a href="<?php echo home_url( ); ?>">Home</a></li>
-            <li><a href="<?php echo home_url( 'about' ); ?>">About</a></li>
-            <li><a href="<?php echo get_the_permalink( $post ); ?>"><?php echo get_the_title( $post ); ?></a></li>
-        </ul>
-    </div>
-</section>
+
+<?php echo breadcrumb_trail(); ?>
+
 <?php if( have_rows( 'module' ) ): 
     while( have_rows( 'module' ) ): the_row(); ?>
     <?php if( get_row_layout() == 'visit_info' ): ?>

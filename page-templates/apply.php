@@ -18,14 +18,9 @@ global $post;
     </div>
 </section>
 <?php get_template_part( 'templates/content', 'form' ); ?>
-<section class="bg-l-gray d-md-none">
-    <div class="container">
-        <ul class="pagination-list">
-            <li><a href="<?php echo home_url( ); ?>">Home</a></li>
-            <li><a href="<?php echo get_permalink( $post ); ?>"><?php echo get_the_title( $post ); ?></a></li>
-        </ul>
-    </div>
-</section>
+
+<?php echo breadcrumb_trail(); ?>
+
 <section class="pt-3 pb-6 py-md-2">
     <div class="container">
         <div class="block-nav-anchors sidebar-m-hidden">

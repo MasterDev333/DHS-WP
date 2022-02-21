@@ -36,7 +36,7 @@ function breadcrumb_trail( $args = array() ) {
 
 	/* Set up the default arguments for the breadcrumb. */
 	$defaults = array(
-		'separator' => '/',
+		'separator' => '',
 		'before' => '',
 		'after' => false,
 		'front_page' => true,
@@ -61,7 +61,7 @@ function breadcrumb_trail( $args = array() ) {
 	if ( $show_home && is_front_page() )
 		$trail['trail_end'] = "{$show_home}";
 	elseif ( $show_home )
-		$trail[] = '<a href="' . esc_url(home_url().'/') . '" title="' . esc_attr(get_bloginfo( 'name' )) . '" rel="home" class="trail-begin">' . $show_home . '</a>';
+		$trail[] = '<li><a href="' . esc_url(home_url().'/') . '" title="' . esc_attr(get_bloginfo( 'name' )) . '" rel="home" class="trail-begin">' . $show_home . '</a></li>';
 
 	if ( is_home() && !is_front_page() ) {
 		$home_page = get_page( $wp_query->get_queried_object_id() );
@@ -77,7 +77,7 @@ function breadcrumb_trail( $args = array() ) {
 				foreach ( $parents as $parent )
 					$trail[] = $parent;
 			}
-		$trail['trail_end'] = get_the_title( $home_page->ID );
+		$trail['trail_end'] = '<li>' . get_the_title( $home_page->ID ) . '</li>';
 	}
 
 	elseif ( is_singular() ) {
@@ -104,7 +104,7 @@ function breadcrumb_trail( $args = array() ) {
 				$trail[] = $terms;
 		}
 
-		$trail['trail_end'] = get_the_title();
+		$trail['trail_end'] = '<li>' . get_the_title() . '</li>';
 	}
 
 	elseif ( is_archive() ) {
@@ -121,22 +121,22 @@ function breadcrumb_trail( $args = array() ) {
 					$trail['trail_end'] = $parents;
 			}
 
-			$trail['trail_end'] .= $term->name;
+			$trail['trail_end'] .= '<li>' . $term->name . '</li>';
 		}
 
 		elseif ( is_author() )
-			$trail['trail_end'] = get_the_author_meta( 'display_name', get_query_var( 'author' ) );
+			$trail['trail_end'] = '<li>' .  get_the_author_meta( 'display_name', get_query_var( 'author' ) ) . '</li>';
 
 		elseif ( is_time() ) {
 
 			if ( get_query_var( 'minute' ) && get_query_var( 'hour' ) )
-				$trail['trail_end'] = get_the_time( __( 'g:i a', 'am' ) );
+				$trail['trail_end'] = '<li>' .  get_the_time( __( 'g:i a', 'am' ) ) . '</li>';
 
 			elseif ( get_query_var( 'minute' ) )
-				$trail['trail_end'] = sprintf( __( 'Minute %1$s', 'am' ), get_the_time( __( 'i', 'am' ) ) );
+				$trail['trail_end'] = '<li>' .  sprintf( __( 'Minute %1$s', 'am' ), get_the_time( __( 'i', 'am' ) ) ) . '</li>';
 
 			elseif ( get_query_var( 'hour' ) )
-				$trail['trail_end'] = get_the_time( __( 'g a', 'am' ) );
+				$trail['trail_end'] = '<li>' .  get_the_time( __( 'g a', 'am' ) ) . '</li>';
 		}
 
 		elseif ( is_date() ) {
@@ -144,37 +144,37 @@ function breadcrumb_trail( $args = array() ) {
 			if ( is_day() ) {
 				$trail[] = '<a href="' . get_year_link( get_the_time( __( 'Y', 'am' ) ) ) . '" title="' . esc_attr(get_the_time( __( 'Y', 'am' ) )) . '">' . get_the_time( __( 'Y', 'am' ) ) . '</a>';
 				$trail[] = '<a href="' . get_month_link( get_the_time( __( 'Y', 'am' ) ), get_the_time( __( 'm', 'am' ) ) ) . '" title="' . esc_attr(get_the_time( __( 'F', 'am' ) )) . '">' . get_the_time( __( 'F', 'am' ) ) . '</a>';
-				$trail['trail_end'] = get_the_time( __( 'j', 'am' ) );
+				$trail['trail_end'] = '<li>' .  get_the_time( __( 'j', 'am' ) ) . '</li>';
 			}
 
 			elseif ( get_query_var( 'w' ) ) {
 				$trail[] = '<a href="' . get_year_link( get_the_time( __( 'Y', 'am' ) ) ) . '" title="' . esc_attr(get_the_time( __( 'Y', 'am' ) )) . '">' . get_the_time( __( 'Y', 'am' ) ) . '</a>';
-				$trail['trail_end'] = sprintf( __( 'Week %1$s', 'hybrid' ), get_the_time( __( 'W', 'am' ) ) );
+				$trail['trail_end'] = '<li>' .  sprintf( __( 'Week %1$s', 'hybrid' ), get_the_time( __( 'W', 'am' ) ) ) . '</li>';
 			}
 
 			elseif ( is_month() ) {
 				$trail[] = '<a href="' . get_year_link( get_the_time( __( 'Y', 'am' ) ) ) . '" title="' . esc_attr(get_the_time( __( 'Y', 'am' ) )) . '">' . get_the_time( __( 'Y', 'am' ) ) . '</a>';
-				$trail['trail_end'] = get_the_time( __( 'F', 'am' ) );
+				$trail['trail_end'] = '<li>' .  get_the_time( __( 'F', 'am' ) ) . '</li>';
 			}
 
 			elseif ( is_year() ) {
-				$trail['trail_end'] = get_the_time( __( 'Y', 'am' ) );
+				$trail['trail_end'] = '<li>' .  get_the_time( __( 'Y', 'am' ) ) . '</li>';
 			}
 		}
 	}
 
 	elseif ( is_search() )
-		$trail['trail_end'] = sprintf( __( 'Search results for &quot;%1$s&quot;', 'am' ), esc_attr( get_search_query() ) );
+		$trail['trail_end'] = '<li>' .  sprintf( __( 'Search results for &quot;%1$s&quot;', 'am' ), esc_attr( get_search_query() ) ) . '</li>';
 
 	elseif ( is_404() )
-		$trail['trail_end'] = __( '404 Not Found', 'am' );
+		$trail['trail_end'] = '<li>' .  __( '404 Not Found', 'am' ) . '</li>';
 
 	/* Connect the breadcrumb trail. */
-	$breadcrumb = '<div class="breadcrumb"><div class="breadcrumb-trail">';
+	$breadcrumb = '<section class="bg-l-gray d-md-none"><div class="container"><ul class="pagination-list">';
 	$breadcrumb .= " {$before} ";
 	if ( is_array( $trail ) )
 		$breadcrumb .= join( " {$separator} ", $trail );
-	$breadcrumb .= '</div></div>';
+	$breadcrumb .= '</ul></div></section>';
 
 	$breadcrumb = apply_filters( 'breadcrumb_trail', $breadcrumb );
 

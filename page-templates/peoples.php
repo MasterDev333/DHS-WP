@@ -14,14 +14,8 @@ global $post; ?>
         <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'content', 'o' => 'f', 't' => 'p', 'tc' => 'mw-450' ) ); ?>
     </div>
 </section>
-<section class="bg-l-gray d-md-none">
-    <div class="container">
-        <ul class="pagination-list">
-            <li><a href="<?php echo home_url( ); ?>">Home</a></li>
-            <li><a href="<?php echo get_the_permalink( $post ); ?>"><?php echo get_the_title( $post ); ?></a></li>
-        </ul>
-    </div>
-</section>
+
+<?php echo breadcrumb_trail(); ?>
 
 <?php $args = array( 
     'post_type' => 'people',

@@ -54,13 +54,13 @@ $name = get_field( 'name' ); ?>
         </div>
     </div>
 </section>
+<?php if( $posts = get_field( 'related_posts' ) ): ?>
 <section class="pt-5 pb-5 py-md-5">
     <div class="container">
         <div class="peoples-grid">
             <div>
                 <h3 class="h-over">Recent Articles From the Preacher’s Corner</h3>
             </div>
-            <?php if( $posts = get_field( 'related_posts' ) ): ?>
             <div>
                 <div class="d-grid text-white">
                     <?php foreach( $posts as $rpost ): ?>
@@ -93,10 +93,10 @@ $name = get_field( 'name' ); ?>
                     <?php endforeach; ?>
                 </div>
             </div>
-            <?php endif; ?>
         </div>
     </div>
 </section>
+<?php endif; ?>
 <?php if( $contact = get_field( 'contact_form' ) ): ?>
 <section class="pt-7 pb-12">
     <div class="container">

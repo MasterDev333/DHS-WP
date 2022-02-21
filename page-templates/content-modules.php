@@ -24,15 +24,15 @@ get_header(); ?>
     <?php if( get_row_layout() == 'post_slider_banner' ): ?>
         <?php if( get_sub_field( 'style' ) == 'light' ): ?>
             <section class="pt-4 pb-25 pb-md-15 pt-lg-7 p-r text-white mh-74 mh-md-64 a-end a-lg-start hero-wrapper">
-                <?php if( get_sub_field( 'video' ) ): ?>
-                    <?php get_template_part_args( 'templates/content-modules-video', array( 'v' => 'video', 'w' => 'div', 'wc' => 'bg-str-f bg-dark-o' ) ); ?>
+                <?php if( get_field( 'post_banner_video', 'options' ) ): ?>
+                    <?php get_template_part_args( 'templates/content-modules-video', array( 'v' => 'post_banner_video', 'o' => 'o', 'w' => 'div', 'wc' => 'bg-str-f bg-dark-o' ) ); ?>
                 <?php else: ?>
-                    <?php get_template_part_args( 'templates/content-modules-image', array( 'v' => 'background', 'is' => false, 'v2x' => false, 'w' => 'div', 'wc' => 'bg-str-f bg-dark-o' ) ); ?>
+                    <?php get_template_part_args( 'templates/content-modules-image', array( 'v' => 'post_banner_background', 'o' => 'o', 'is' => false, 'v2x' => false, 'w' => 'div', 'wc' => 'bg-str-f bg-dark-o' ) ); ?>
                 <?php endif; ?>
                 <div class="container">
-                    <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'sub_heading', 't' => 'h5' ) ); ?>
-                    <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'heading', 't' => 'h1', 'tc' => 'mw-550' ) ); ?>
-                    <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'content', 't' => 'p', 'tc' => 'mw-450' ) ); ?>
+                    <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'post_banner_subheading', 'o' => 'o', 't' => 'h5' ) ); ?>
+                    <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'post_banner_heading', 'o' => 'o', 't' => 'h1', 'tc' => 'mw-550' ) ); ?>
+                    <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'post_banner_content', 'o' => 'o', 't' => 'p', 'tc' => 'mw-450' ) ); ?>
                 </div>
             </section>
             <section class="pt-01 pb-2 pb-md-5 text-white">
@@ -40,19 +40,21 @@ get_header(); ?>
                     <div class="slider-wrapper">
                         <div class="slider-left-row">
                             <div class="slider-left-tittle">
-                                <h5 class="d-md-none"><small>from</small></h5>
+                                <?php if( $subheading = get_field( 'post_banner_slider_subheading', 'options' ) ): ?>
+                                <h5 class="d-md-none"><small><?php echo $subheading; ?></small></h5>
+                                <?php endif; ?>
                                 <h3 class="tittle-with-ico">
-                                    <?php if( $subheading = get_sub_field( 'post_banner_subheading', 'options' ) ): ?>
+                                    <?php if( $subheading ): ?>
                                         <span class="d-md-block d-none h5"><?php echo $subheading; ?></span>
                                     <?php endif; ?>
-                                    <?php if( $heading = get_sub_field( 'post_banner_heading', 'options' ) ): ?>
+                                    <?php if( $heading = get_field( 'post_banner_slider_heading', 'options' ) ): ?>
                                         <?php echo $heading; ?>
                                      <?php endif; ?>
                                 </h3>
                             </div>
-                            <?php get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'all_cta', 'c' => 'btn _arrow', 'w' => 'div', 'wc' => 'slider-left-btn d-md-none' ) ); ?>
+                            <?php get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'post_banner_cta', 'o' => 'o', 'c' => 'btn _arrow', 'w' => 'div', 'wc' => 'slider-left-btn d-md-none' ) ); ?>
                         </div>
-                        <?php if( $posts = get_sub_field( 'posts' ) ): ?>
+                        <?php if( $posts = get_field( 'post_banner_posts', 'options' ) ): ?>
                         <div class="slider-right-row">
                             <div class="swiper swiper-article">
                                 <div class="swiper-wrapper">
@@ -91,7 +93,7 @@ get_header(); ?>
                     </div>
                 </div>
                 <div class="container">
-                    <?php get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'all_cta', 'c' => 'btn _arrow', 'w' => 'div', 'wc' => 'text-right d-none d-md-block pt-2' ) ); ?>
+                    <?php get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'post_banner_cta', 'o' => 'o', 'c' => 'btn _arrow', 'w' => 'div', 'wc' => 'text-right d-none d-md-block pt-2' ) ); ?>
                     <div class="swiper-btn-v1 swiper-article-btn-block d-md-none">
                         <div class="swiper-button-prev swiper-button-prev-s1"></div>
                         <div class="swiper-button-next swiper-button-next-s1"></div>
@@ -100,24 +102,28 @@ get_header(); ?>
             </section>
         <?php else: ?>
             <section class="pt-16 pb-5 pt-md-12 p-r text-white bg-black">
-                <?php get_template_part_args( 'templates/content-modules-image', array( 'v' => 'background', 'w' => 'div', 'wc' => 'bg-str-f _h-36 _h-md-30 bg-dark-o z-0' ) ); ?>
+                <?php if( get_field( 'post_banner_video', 'options' ) ): ?>
+                    <?php get_template_part_args( 'templates/content-modules-video', array( 'v' => 'post_banner_video', 'o' => 'o', 'w' => 'div', 'wc' => 'bg-str-f _h-36 _h-md-30 bg-dark-o z-0' ) ); ?>
+                <?php else: ?>
+                    <?php get_template_part_args( 'templates/content-modules-image', array( 'v' => 'post_banner_background', 'o' => 'o', 'w' => 'div', 'wc' => 'bg-str-f _h-36 _h-md-30 bg-dark-o z-0' ) ); ?>
+                <?php endif; ?>
                 <div class="container-s">
                     <div class="slider-wrapper">
                         <div class="slider-left-row">
                             <div class="slider-left-tittle">
-                                <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'post_banner_subheading', 'o' => 'o', 't' => 'small', 'w' => 'h5', 'wc' => 'd-md-none' ) ); ?>
+                                <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'post_banner_slider_subheading', 'o' => 'o', 't' => 'small', 'w' => 'h5', 'wc' => 'd-md-none' ) ); ?>
                                 <h3 class="tittle-with-ico">
-                                    <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'post_banner_subheading', 'o' => 'o', 't' => 'span', 'tc' => 'd-md-block d-none h5' ) ); ?>
+                                    <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'post_banner_slider_subheading', 'o' => 'o', 't' => 'span', 'tc' => 'd-md-block d-none h5' ) ); ?>
                                     <?php 
-                                    if( $heading = get_sub_field( 'post_banner_heading' ) ): 
+                                    if( $heading = get_field( 'post_banner_slider_heading', 'options' ) ): 
                                         echo $heading;
                                     endif;
                                     ?>
                                 </h3>
                             </div>
-                            <?php get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'all_cta', 'c' => 'btn _arrow', 'w' => 'div', 'wc' => 'slider-left-btn d-md-none' ) ); ?>
+                            <?php get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'post_banner_cta', 'o' => 'o', 'c' => 'btn _arrow', 'w' => 'div', 'wc' => 'slider-left-btn d-md-none' ) ); ?>
                         </div>
-                        <?php if( $posts = get_sub_field( 'posts' ) ): ?>
+                        <?php if( $posts = get_field( 'post_banner_posts', 'options' ) ): ?>
                         <div class="slider-right-row">
                             <div class="swiper swiper-article">
                                 <div class="swiper-wrapper">
@@ -156,9 +162,7 @@ get_header(); ?>
                     </div>
                 </div>
                 <div class="container">
-                    <div class="text-right d-none d-md-block pt-2">
-                        <a href="#" class="btn _arrow">SEE ALL</a>
-                    </div>
+                    <?php get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'post_banner_cta', 'o' => 'o', 'c' => 'btn _arrow', 'w' => 'div', 'wc' => 'text-right d-none d-md-block pt-2' ) ); ?>
                     <div class="swiper-btn-v1 swiper-article-btn-block d-md-none">
                         <div class="swiper-button-prev swiper-button-prev-s1"></div>
                         <div class="swiper-button-next swiper-button-next-s1"></div>
@@ -234,7 +238,7 @@ get_header(); ?>
 			</section>
         <?php endif; ?>
     <?php elseif( get_row_layout() == 'background_content' ): ?>
-        <section class="pt-14 pb-12 pt-md-12  pb-md-10 bg-gray bg-img _v1 quote-wrapper">
+        <section class="pt-14 pb-12 pt-md-12  pb-md-10 bg-gray bg-img _v1 quote-wrapper background-content">
             <?php get_template_part_args( 'templates/content-modules-video', array( 'v' => 'video', 'c' => 'background-content__video' ) ); ?>
             <div class="container">
                 <div class="mw-750 mx-a">

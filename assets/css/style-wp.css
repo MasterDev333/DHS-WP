@@ -310,3 +310,39 @@
 .img-txt-grid ol li {
   list-style: decimal
 }
+
+.bg-str-f video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+.background-content::after {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #CFDBD5;
+  opacity: 0.8;
+  z-index: 1;
+}
+.background-content__video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.pagination-list {
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #242423;
+}
