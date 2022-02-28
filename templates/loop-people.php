@@ -1,5 +1,14 @@
-<?php global $post; ?>
-<li>
+<?php global $post; 
+$terms = get_the_terms( $post, 'people_role' );
+if( $terms ) {
+    foreach( $terms as $key=>$term ) {
+        $roles .= $term->slug;
+        if( $key < count( $terms ) ) {
+            $roles .= ' ';
+        }
+    }
+}   ?>
+<li data-role="<?php echo $roles; ?>">
     <?php if( $primary_term = get_primary_taxonomy_term( $post, 'people_role' ) ): ?>
     <h5><?php echo $primary_term['title']; ?></h5>
     <?php endif; ?>

@@ -4,7 +4,7 @@ get_header();
 global $post; 
 $name = get_field( 'name' ); ?>
 
-<section class="bg-l-gray d-md-none">
+<section class="bg-l-gray d-md-none breadcrumb">
     <div class="container">
         <ul class="pagination-list">
             <li><a href="<?php echo home_url(); ?>">Home</a></li>
@@ -19,27 +19,32 @@ $name = get_field( 'name' ); ?>
             <a href="<?php echo home_url( 'people' ); ?>" class="link-back"><i class="icon-keyboard_arrow_left"></i><strong>BACK</strong></a>
         </div>
         <div class="peoples-grid">
+            <?php if( has_post_thumbnail( $post ) ): ?>
             <div>
                 <div class="bg-str _2-4 bg-over _bg-xs _bg-gray _l-b mw-md-22">
                     <img src="<?php echo get_the_post_thumbnail_url( $post ); ?>" 
                         alt="<?php echo get_the_title( $post ); ?>">
                 </div>
             </div>
+            <?php endif; ?>
             <div>
                 <h1 class="h2"><?php echo get_the_title( $post ); ?></h1>
                 <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'position', 'o' => 'f', 't' => 'strong', 'w' => 'div' ) ); ?>
                 <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'study', 'o' => 'f', 't' => 'p' ) ); ?>
                 <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'degree', 'o' => 'f', 't' => 'p' ) ); ?>
+                <?php 
+                $contact = get_field( 'contact' );
+                if( $contact['twitter'] || $contact['email'] ): ?>
                 <h6 class="pt-2">Ways to contact</h6>
                 <div class="indent">
-                    <?php $contact = get_field( 'contact' );
-                    if( $contact['twitter'] ): ?>
+                    <?php if( $contact['twitter'] ): ?>
                         <a href="<?php echo $contact['twitter']['url']; ?>" class="btn _out _lg"><i class="icon-twitter text-brand pr-2"></i><?php echo $contact['twitter']['title']; ?></a>
                     <?php endif; ?>
                     <?php if( $contact['email'] ): ?>
                         <a href="mailto:<?php echo $contact['email']; ?>" class="btn _out _lg"><i class="icon-envelope text-brand pr-2"></i>Email <?php the_field( 'name' ); ?></a>
                     <?php endif; ?>
                 </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>

@@ -27,22 +27,24 @@ if( $query->have_posts( ) ): ?>
     <div class="container">
         <div class="people-grid">
             <div>
-                <h4>Our People</h4>
-                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'sidebar_heading', 'o' => 'f', 't' => 'h4' ) ); ?>
+                <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'sidebar_content', 'o' => 'f', 't' => 'p' ) ); ?>
+                <?php if( $roles = get_terms( 'people_role' ) ): ?>
                 <h6 class="d-md-none">By Role</h6>
-                <ul class="people-grid-nav d-md-none">
-                    <li><a href="#">Admininstration</a></li>
-                    <li class="active"><a href="#">Faculty</a></li>
-                    <li><a href="#">Staff</a></li>
+                <ul class="people-grid-nav d-md-none"> 
+                    <?php foreach( $roles as $role ): ?>
+                    <li><a href="#" data-role="<?php echo $role->slug; ?>"><?php echo $role->name; ?></a></li>
+                    <?php endforeach; ?>
                 </ul>
                 <div class="d-none d-md-block select-custom">
-                    <select data-jcf="{&quot;wrapNative&quot;: false, &quot;wrapNativeOnMobile&quot; : false, &quot;fakeDropInBody&quot;: false}">
-                        <option>Sort by role</option>
-                        <option>Sort by other</option>
-                        <option>Sort by other2</option>
-                        <option>Sort by other3</option>
+                    <select id="people-role-select" data-jcf="{&quot;wrapNative&quot;: false, &quot;wrapNativeOnMobile&quot; : false, &quot;fakeDropInBody&quot;: false}">
+                        <option value="">All</option>
+                        <?php foreach( $roles as $role ): ?>
+                        <option value="<?php echo $role->slug; ?>"><?php echo $role->name; ?></option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
+                <?php endif; ?>
             </div>
             <div>
                 <ul class="people-grid-list">

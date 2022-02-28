@@ -7,8 +7,8 @@ Template Post Type: page
 get_header(); ?>
 <?php if( get_field( 'enable_section' ) ) : ?>
 <section class="py-5 pt-lg-7 pb-lg-12 p-r text-white a-center mh-50 hero-wrapper">
-    <?php if( get_sub_field( 'video' ) ): ?>
-        <?php get_template_part_args( 'templates/content-modules-image', array( 'v' => 'background', 'o' => 'f', 'w' => 'div', 'wc' => 'bg-str-f bg-dark-o' ) ); ?>
+    <?php if( get_field( 'background' ) ): ?>
+        <?php get_template_part_args( 'templates/content-modules-image', array( 'v' => 'background', 'o' => 'f', 'w' => 'div', 'wc' => 'bg-str-f bg-dark-o', 'is' => false, 'v2x' => false ) ); ?>
     <?php else: ?> 
         <?php get_template_part_args( 'templates/content-modules-video', array( 'v' => 'video', 'o' => 'f', 'w' => 'div', 'wc' => 'bg-str-f bg-dark-o' ) ); ?>
     <?php endif; ?>
@@ -24,20 +24,21 @@ get_header(); ?>
     <?php if( get_row_layout() == 'post_slider_banner' ): ?>
         <?php if( get_sub_field( 'style' ) == 'light' ): ?>
             <section class="pt-4 pb-25 pb-md-15 pt-lg-7 p-r text-white mh-74 mh-md-64 a-end a-lg-start hero-wrapper">
-                <?php if( get_field( 'post_banner_video', 'options' ) ): ?>
-                    <?php get_template_part_args( 'templates/content-modules-video', array( 'v' => 'post_banner_video', 'o' => 'o', 'w' => 'div', 'wc' => 'bg-str-f bg-dark-o' ) ); ?>
+                <?php if( get_sub_field( 'video' ) ): ?>
+                    <?php get_template_part_args( 'templates/content-modules-video', array( 'v' => 'video', 'w' => 'div', 'wc' => 'bg-str-f bg-dark-o' ) ); ?>
                 <?php else: ?>
-                    <?php get_template_part_args( 'templates/content-modules-image', array( 'v' => 'post_banner_background', 'o' => 'o', 'is' => false, 'v2x' => false, 'w' => 'div', 'wc' => 'bg-str-f bg-dark-o' ) ); ?>
+                    <?php get_template_part_args( 'templates/content-modules-image', array( 'v' => 'background', 'is' => false, 'v2x' => false, 'w' => 'div', 'wc' => 'bg-str-f bg-dark-o' ) ); ?>
                 <?php endif; ?>
                 <div class="container">
-                    <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'post_banner_subheading', 'o' => 'o', 't' => 'h5' ) ); ?>
-                    <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'post_banner_heading', 'o' => 'o', 't' => 'h1', 'tc' => 'mw-550' ) ); ?>
-                    <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'post_banner_content', 'o' => 'o', 't' => 'p', 'tc' => 'mw-450' ) ); ?>
+                    <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'sub_heading', 't' => 'h5' ) ); ?>
+                    <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'heading', 't' => 'h1', 'tc' => 'mw-550' ) ); ?>
+                    <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'content', 't' => 'p', 'tc' => 'mw-450' ) ); ?>
+                    <?php get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'cta', 'c' => 'btn  _arrow _btn-brand' ) ); ?>
                 </div>
             </section>
             <section class="pt-01 pb-2 pb-md-5 text-white">
                 <div class="container-s mtn-22 mtn-md-15">
-                    <div class="slider-wrapper">
+                    <div class="slider-wrapper" id="latest-content">
                         <div class="slider-left-row">
                             <div class="slider-left-tittle">
                                 <?php if( $subheading = get_field( 'post_banner_slider_subheading', 'options' ) ): ?>
@@ -54,46 +55,46 @@ get_header(); ?>
                             </div>
                             <?php get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'post_banner_cta', 'o' => 'o', 'c' => 'btn _arrow', 'w' => 'div', 'wc' => 'slider-left-btn d-md-none' ) ); ?>
                         </div>
-                        <?php if( $posts = get_field( 'post_banner_posts', 'options' ) ): ?>
-                        <div class="slider-right-row">
-                            <div class="swiper swiper-article">
-                                <div class="swiper-wrapper">
-                                    <?php foreach( $posts as $cpost ): ?>
-                                    <div class="swiper-slide">
-                                        <a href="<?php echo get_the_permalink( $cpost ); ?>">
-                                            <div class="article-inner">
-                                                <?php if( $categories = get_the_category( $cpost ) ): ?> 
-                                                <ul class="article-tag-list">
-                                                    <?php foreach( $categories as $category ): ?>
-                                                        <li><?php echo $category->name; ?></li>
-                                                    <?php endforeach; ?>
-                                                </ul>
-                                                <?php endif; ?>
-                                                <div class="bg-str">
-                                                    <?php 
-                                                    $img_url = get_the_post_thumbnail_url( $cpost, 'blog-card' );
-                                                    $img_url_2x = get_the_post_thumbnail_url( $cpost, 'blog-card-2x' ); ?>
-                                                    <img src="<?php echo $img_url; ?>" alt="img" srcset="<?php echo $img_url_2x; ?> 2x">
-                                                </div>
-                                                <div class="article-info">
-                                                    <h6><?php echo get_the_date( 'l F, d', $cpost ); ?></h6>
-                                                    <h3><?php echo get_the_title( $cpost ); ?></h3>
-                                                    <?php if( has_excerpt( $cpost ) ): ?>
-                                                        <p><?php echo get_the_excerpt( $cpost ); ?></p>
-                                                    <?php endif; ?>
-                                                </div>
-                                            </div>
-                                        </a>
+                        <?php if( get_field( 'post_banner_type', 'options' ) == 'Custom' ): ?>
+                            <?php if( $posts = get_field( 'post_banner_posts', 'options' ) ): ?>
+                            <div class="slider-right-row">
+                                <div class="swiper swiper-article">
+                                    <div class="swiper-wrapper">
+                                        <?php foreach( $posts as $cpost ): ?>
+                                        <div class="swiper-slide">
+                                            <?php get_template_part( 'templates/loop-post', 'slide', array( 'post' => $cpost ) ); ?>
+                                        </div>
+                                        <?php endforeach; ?>
                                     </div>
-                                    <?php endforeach; ?>
                                 </div>
                             </div>
-                        </div>
+                            <?php endif; ?>
+                        <?php else: ?>
+                            <?php $args = array( 
+                                    'post_type' => 'post',
+                                    'post_status' => 'publish',
+                                    'posts_per_page' => '4',
+                                );
+                                $query = new WP_Query( $args ); 
+                                if( $query->have_posts(  ) ): ?>
+                                <div class="slider-right-row">
+                                    <div class="swiper swiper-article">
+                                        <div class="swiper-wrapper">
+                                            <?php while( $query->have_posts( ) ): $query->the_post( ); ?>
+                                                <div class="swiper-slide">
+                                                    <?php get_template_part( 'templates/loop-post', 'slide', array( 'post' => get_the_ID(  ) ) ); ?>
+                                                </div>
+                                            <?php endwhile; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php endif; 
+                                wp_reset_query(  ); ?>
                         <?php endif; ?>
                     </div>
                 </div>
                 <div class="container">
-                    <?php get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'post_banner_cta', 'o' => 'o', 'c' => 'btn _arrow', 'w' => 'div', 'wc' => 'text-right d-none d-md-block pt-2' ) ); ?>
+                    <?php get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'post_banner_slider_cta', 'o' => 'o', 'c' => 'btn _arrow', 'w' => 'div', 'wc' => 'text-right d-none d-md-block pt-2' ) ); ?>
                     <div class="swiper-btn-v1 swiper-article-btn-block d-md-none">
                         <div class="swiper-button-prev swiper-button-prev-s1"></div>
                         <div class="swiper-button-next swiper-button-next-s1"></div>
@@ -102,13 +103,13 @@ get_header(); ?>
             </section>
         <?php else: ?>
             <section class="pt-16 pb-5 pt-md-12 p-r text-white bg-black">
-                <?php if( get_field( 'post_banner_video', 'options' ) ): ?>
-                    <?php get_template_part_args( 'templates/content-modules-video', array( 'v' => 'post_banner_video', 'o' => 'o', 'w' => 'div', 'wc' => 'bg-str-f _h-36 _h-md-30 bg-dark-o z-0' ) ); ?>
+                <?php if( get_sub_field( 'video' ) ): ?>
+                    <?php get_template_part_args( 'templates/content-modules-video', array( 'v' => 'video', 'w' => 'div', 'wc' => 'bg-str-f _h-36 _h-md-30 bg-dark-o z-0' ) ); ?>
                 <?php else: ?>
-                    <?php get_template_part_args( 'templates/content-modules-image', array( 'v' => 'post_banner_background', 'o' => 'o', 'w' => 'div', 'wc' => 'bg-str-f _h-36 _h-md-30 bg-dark-o z-0' ) ); ?>
+                    <?php get_template_part_args( 'templates/content-modules-image', array( 'v' => 'background', 'w' => 'div', 'wc' => 'bg-str-f _h-36 _h-md-30 bg-dark-o z-0' ) ); ?>
                 <?php endif; ?>
                 <div class="container-s">
-                    <div class="slider-wrapper">
+                    <div class="slider-wrapper" id="latest-content">
                         <div class="slider-left-row">
                             <div class="slider-left-tittle">
                                 <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'post_banner_slider_subheading', 'o' => 'o', 't' => 'small', 'w' => 'h5', 'wc' => 'd-md-none' ) ); ?>
@@ -123,46 +124,46 @@ get_header(); ?>
                             </div>
                             <?php get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'post_banner_cta', 'o' => 'o', 'c' => 'btn _arrow', 'w' => 'div', 'wc' => 'slider-left-btn d-md-none' ) ); ?>
                         </div>
-                        <?php if( $posts = get_field( 'post_banner_posts', 'options' ) ): ?>
-                        <div class="slider-right-row">
-                            <div class="swiper swiper-article">
-                                <div class="swiper-wrapper">
-                                    <?php foreach( $posts as $cpost ): ?>
-                                    <div class="swiper-slide">
-                                        <a href="<?php echo get_the_permalink( $cpost ); ?>">
-                                            <div class="article-inner">
-                                                <?php if( $categories = get_the_category( $cpost ) ): ?> 
-                                                <ul class="article-tag-list">
-                                                    <?php foreach( $categories as $category ): ?>
-                                                        <li><?php echo $category->name; ?></li>
-                                                    <?php endforeach; ?>
-                                                </ul>
-                                                <?php endif; ?>
-                                                <div class="bg-str">
-                                                    <?php 
-                                                    $img_url = get_the_post_thumbnail_url( $cpost, 'blog-card' );
-                                                    $img_url_2x = get_the_post_thumbnail_url( $cpost, 'blog-card-2x' ); ?>
-                                                    <img src="<?php echo $img_url; ?>" alt="img" srcset="<?php echo $img_url_2x; ?> 2x">
-                                                </div>
-                                                <div class="article-info">
-                                                    <h6><?php echo get_the_date( 'l F, d', $cpost ); ?></h6>
-                                                    <h3><?php echo get_the_title( $cpost ); ?></h3>
-                                                    <?php if( has_excerpt( $cpost ) ): ?>
-                                                        <p><?php echo get_the_excerpt( $cpost ); ?></p>
-                                                    <?php endif; ?>
-                                                </div>
+                        <?php if( get_field( 'post_banner_type', 'options' ) == 'Custom' ): ?>
+                            <?php if( $posts = get_field( 'post_banner_posts', 'options' ) ): ?>
+                                <div class="slider-right-row">
+                                    <div class="swiper swiper-article">
+                                        <div class="swiper-wrapper">
+                                            <?php foreach( $posts as $cpost ): ?>
+                                            <div class="swiper-slide">
+                                                <?php get_template_part( 'templates/loop-post', 'slide', array( 'post' => $cpost ) ); ?>
                                             </div>
-                                        </a>
+                                            <?php endforeach; ?>
+                                        </div>
                                     </div>
-                                    <?php endforeach; ?>
+                                </div>
+                            <?php endif; ?>
+                        <?php else: ?>
+                            <?php $args = array( 
+                                'post_type' => 'post',
+                                'post_status' => 'publish',
+                                'posts_per_page' => '4',
+                            );
+                            $query = new WP_Query( $args ); 
+                            if( $query->have_posts(  ) ): ?>
+                            <div class="slider-right-row">
+                                <div class="swiper swiper-article">
+                                    <div class="swiper-wrapper">
+                                        <?php while( $query->have_posts( ) ): $query->the_post( ); ?>
+                                            <div class="swiper-slide">
+                                                <?php get_template_part( 'templates/loop-post', 'slide', array( 'post' => get_the_ID(  ) ) ); ?>
+                                            </div>
+                                        <?php endwhile; ?>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            <?php endif; 
+                            wp_reset_query(  ); ?>
                         <?php endif; ?>
                     </div>
                 </div>
                 <div class="container">
-                    <?php get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'post_banner_cta', 'o' => 'o', 'c' => 'btn _arrow', 'w' => 'div', 'wc' => 'text-right d-none d-md-block pt-2' ) ); ?>
+                    <?php get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'post_banner_slider_cta', 'o' => 'o', 'c' => 'btn _arrow', 'w' => 'div', 'wc' => 'text-right d-none d-md-block pt-2' ) ); ?>
                     <div class="swiper-btn-v1 swiper-article-btn-block d-md-none">
                         <div class="swiper-button-prev swiper-button-prev-s1"></div>
                         <div class="swiper-button-next swiper-button-next-s1"></div>
@@ -342,13 +343,12 @@ get_header(); ?>
         <section class="section-submit">
             <div class="container">
                 <div class="block-submit _donation">
-                    <h3>Make a Donation</h3>
+                    <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'heading', 't' => 'h3' ) ); ?>
                     <div class="donation-wrapper">
                         <!-- <h4><span class="pr-2">With PayPal:</span> <a href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/none-btn_donateCC_LG.gif" alt="donate" width="100"></a></h4>
                         <hr class="my-3"> -->
-                        <h4>With Credit Card:</h4>
-                        <script src="https://donorbox.org/widget.js" ;="" paypalexpress="false"></script>
-                        <iframe id="iframeName" loading="lazy" src="https://donorbox.org/embed/website-donations-201" ;="" name="donorbox" allowpaymentrequest="allowpaymentrequest" seamless="seamless" frameborder="0" scrolling="no" height="" width="100%"></iframe>
+                        <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'subheading', 't' => 'h4' ) ); ?>
+                        <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'form_code', 't' => 'div' ) ); ?>
                     </div>
                 </div>
             </div>
@@ -446,6 +446,20 @@ get_header(); ?>
                     <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'description', 't' => 'p', 'w' => 'div' ) ); ?>
                     <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'content', 't' => 'div', 'tc' => 'span-2 px-10 px-lg-0 list-ico' ) ); ?>
                 </div>
+            </div>
+        </section>
+    <?php elseif( get_row_layout() == 'simple_content' ): ?>
+        <?php 
+        if( !get_sub_field( 'remove_margin_top' ) ) {
+            $class[] = 'mt-10';
+        }
+        if( !get_sub_field( 'remove_margin_bottom' ) ) {
+            $class[] = 'mb-10';
+        } ?>
+        <section class="<?php echo implode( ' ', $class ); ?>">
+            <div class="container">
+                <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'heading', 't' => 'h2' ) ); ?>
+                <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'content', 't' => 'div' ) ); ?>
             </div>
         </section>
     <?php endif; ?> 

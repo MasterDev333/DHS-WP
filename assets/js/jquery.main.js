@@ -11,6 +11,37 @@ jQuery(function () {
 	initAnchors();
 	initSearch();
 	initBlog();
+
+	$('.people-grid-nav a').on('click', function() {
+		if( $(this).hasClass('active') ) {
+			$('.people-grid-list li').show();
+		} else {
+			$('.people-grid-nav li.active').removeClass('active');
+			$(this).closest('li').toggleClass('active');
+			let role = $(this).attr('data-role');
+			$('.people-grid-list li').each(function() {
+				let listRole = $(this).attr('data-role');
+				if(  listRole.includes( role ) ) {
+					$(this).show();
+				}  else {
+					$(this).hide();
+				}
+			});
+		}
+		return false;
+	});
+	$('#people-role-select').on('change', function() {
+		let role = $(this).val();
+		$('.people-grid-list li').each(function() {
+			let listRole = $(this).attr('data-role');
+			if(  listRole.includes( role ) ) {
+				$(this).show();
+			}  else {
+				$(this).hide();
+			}
+		});
+		return false;
+	});
 });
 
 //-------- -------- -------- --------

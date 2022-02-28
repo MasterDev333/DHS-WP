@@ -45,7 +45,11 @@
 									<i class="icon-m-search"></i>Search </button>
 							</div>
 							<div class="online bg-l-gray d-none d-md-block">
-								<?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'news_heading', 'o' => 'o', 't' => 'span', 'tc' => 'online-tittle' ) ); ?>
+								<?php if( $heading = get_field( 'news_heading', 'options' ) ): ?>
+								<a href="<?php echo $heading['url']; ?>" target="<?php echo $heading['target']; ?>">
+									<span class="online-tittle"><?php echo $heading['title']; ?></span>
+								</a>
+								<?php endif; ?>
 								<?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'news_tag', 'o' => 'o', 't' => 'span', 'tc' => 'online-count' ) ); ?>
 							</div>
 							<div class="header-btn d-none d-md-flex">
@@ -109,7 +113,11 @@
 						</div>
 					</div>
 					<div class="online bg-l-gray d-md-none">
-						<?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'news_heading', 'o' => 'o', 't' => 'span', 'tc' => 'online-tittle' ) ); ?>
+						<?php if( $heading = get_field( 'news_heading', 'options' ) ): ?>
+						<a href="<?php echo $heading['url']; ?>" target="<?php echo $heading['target']; ?>">
+							<span class="online-tittle"><?php echo $heading['title']; ?></span>
+						</a>
+						<?php endif; ?>
 						<?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'news_tag', 'o' => 'o', 't' => 'span', 'tc' => 'online-count' ) ); ?>
 					</div>
 					<div class="header-btn d-md-none">

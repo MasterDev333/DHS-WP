@@ -170,7 +170,7 @@ function breadcrumb_trail( $args = array() ) {
 		$trail['trail_end'] = '<li>' .  __( '404 Not Found', 'am' ) . '</li>';
 
 	/* Connect the breadcrumb trail. */
-	$breadcrumb = '<section class="bg-l-gray d-md-none"><div class="container"><ul class="pagination-list">';
+	$breadcrumb = '<section class="bg-l-gray d-md-none breadcrumb"><div class="container"><ul class="pagination-list">';
 	$breadcrumb .= " {$before} ";
 	if ( is_array( $trail ) )
 		$breadcrumb .= join( " {$separator} ", $trail );
