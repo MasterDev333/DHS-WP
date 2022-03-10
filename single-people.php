@@ -49,6 +49,7 @@ $name = get_field( 'name' ); ?>
         </div>
     </div>
 </section>
+<?php if( get_field( 'bio') ): ?>
 <section class="pt-7 pb-5 py-md-5">
     <div class="container">
         <div class="peoples-grid">
@@ -59,12 +60,13 @@ $name = get_field( 'name' ); ?>
         </div>
     </div>
 </section>
+<?php endif; ?>
 <?php if( $posts = get_field( 'related_posts' ) ): ?>
 <section class="pt-5 pb-5 py-md-5">
     <div class="container">
         <div class="peoples-grid">
             <div>
-                <h3 class="h-over">Recent Articles From the Preacher’s Corner</h3>
+                <h3 class="h-over">Recent Articles</h3>
             </div>
             <div>
                 <div class="d-grid text-white">

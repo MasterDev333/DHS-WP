@@ -101,6 +101,53 @@ global $post;
                 </div>
             </div>
         </section>
+    
+    <?php elseif( get_row_layout() == 'tabs' ): ?>
+        <section class="pt-9 pb-5 pt-md-12 pb-md-50">
+            <div class="container">
+                <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'sub_heading', 't' => 'h5' ) ); ?>
+                <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'heading', 't' => 'h2' ) ); ?>
+                <?php if( have_rows( 'tabs' ) ): ?>
+                    <div class="responsiveTabs tabs-vert pt-2">
+                        <ul>
+                            <?php while( have_rows( 'tabs' ) ): the_row( ); ?>
+                            <li><a href="#tab-<?php echo get_row_index(); ?>"><?php the_sub_field( 'tab' ); ?></a></li>
+                            <?php endwhile; ?>
+                        </ul>
+                        <div class="r-tabs-tab-content">
+                            <?php while( have_rows( 'tabs' ) ): the_row(); ?>
+                            <div id="tab-<?php echo get_row_index(); ?>">
+                                <?php $content = get_sub_field( 'content' ); ?>
+                                <?php if( $content['heading'] ): ?>
+                                    <h3><?php echo $content['heading']; ?></h3>
+                                <?php endif; ?>
+                                <?php if( $content['content'] ): ?>
+                                <div class="d-grid _gg-3">
+                                    <?php echo $content['content']; ?>
+                                </div>
+                                <?php endif; ?>
+                            </div>
+                            <?php endwhile; ?>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </section>
+
+    <?php elseif( get_row_layout() == 'simple_content' ): ?>
+        <?php 
+        if( !get_sub_field( 'remove_margin_top' ) ) {
+            $class[] = 'mt-10';
+        }
+        if( !get_sub_field( 'remove_margin_bottom' ) ) {
+            $class[] = 'mb-10';
+        } ?>
+        <section class="<?php echo implode( ' ', $class ); ?>">
+            <div class="container">
+                <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'heading', 't' => 'h2' ) ); ?>
+                <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'content', 't' => 'div' ) ); ?>
+            </div>
+        </section>
     <?php endif; ?>
 <?php endwhile; 
 endif; ?>

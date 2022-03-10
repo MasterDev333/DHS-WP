@@ -23,13 +23,15 @@
 						<img src="<?php echo $site_logo; ?>" alt="DHS">
 					</a>
                     <div class="header-btn-back d-md-none">
-                        <a class="btn-link btn-back _white" href="#"><i class="icon-arrow-left"></i>Back</a>
+                        <button class="btn-link btn-back _white" onclick="history.go(-1);"><i class="icon-arrow-left"></i>Back</button>
                     </div>
                     <div class="header-btn d-md-none">
-                        <a href="tel:(000)000-0000" class="btn btn-md btn-light btn-phone">
+                        <?php if( $phone = get_field( 'phone', 'options' ) ): ?>
+                        <a href="<?php echo $phone['url']; ?>" class="btn btn-md btn-light btn-phone">
                             <i class="icon-m-phone"></i>Need Help? 
-                            <strong>(000)000-0000</strong>
+                            <strong><?php echo $phone['title']; ?></strong>
                         </a>
+                        <?php endif; ?>
                     </div>
                     <div class="d-none d-md-block">
                         <div class="header-nav">
@@ -37,76 +39,7 @@
                                 <div class="nav-drop">
                                     <nav class="nav">
                                         <ul class="header-menu">
-                                            <li class="d-none d-lg-block home-link">
-                                                <a href="#">Home</a>
-                                            </li>
-                                            <li class="has-mega-menu">
-                                                <a href="#">About</a>
-                                                <ul class="mega-menu">
-                                                    <li>
-                                                        <div class="col">
-                                                            <ul class="nav-main-link">
-                                                                <li><a href="#">Mission</a></li>
-                                                                <li><a href="#">History</a></li>
-                                                                <li><a href="#">Campus*</a></li>
-                                                                <li><a href="#">Staff</a></li>
-                                                            </ul>
-                                                            <ul class="nav-sub-link">
-                                                                <li><a href="#">Accreditation</a></li>
-                                                                <li><a href="#">Trustees &amp; Overseers</a></li>
-                                                                <li><a href="#">Administration</a></li>
-                                                                <li><a href="#">Affiliated Institutions</a></li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="col">
-                                                            <ul class="nav-big-link">
-                                                                <li>
-                                                                    <a href="#">Plan Your Visit</a>
-                                                                    <p> Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. </p>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">Contact Us</a>
-                                                                    <p> Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. </p>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="has-mega-menu">
-                                                <a href="#">Admission</a>
-                                                <ul class="mega-menu">
-                                                    <li>
-                                                        <div class="col">
-                                                            <ul class="nav-main-link">
-                                                                <li><a href="#">Tuition &amp; Fees</a></li>
-                                                                <li><a href="#">Requirements</a></li>
-                                                                <li><a href="#">Financial Aid</a></li>
-                                                                <li><a href="#">Housing</a></li>
-                                                            </ul>
-                                                            <ul class="nav-sub-link">
-                                                                <li><a href="#">Continuing Education</a></li>
-                                                                <li><a href="#">Make a Payment</a></li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="col">
-                                                            <ul class="nav-big-link">
-                                                                <li>
-                                                                    <a href="#">Plan Your Visit</a>
-                                                                    <p> Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. </p>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">Apply</a>
-                                                                    <p> Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. </p>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <a href="#">Academics</a>
-                                            </li>
+										    <?php clean_header_menu('mainmenu'); ?>
                                         </ul>
                                     </nav>
                                 </div>
@@ -115,21 +48,24 @@
                                         <i class="icon-m-search"></i>Search </button>
                                 </div>
                                 <div class="online bg-l-gray d-none d-md-block">
-                                    <span class="online-tittle">The Preacher’s Corner</span>
-                                    <span class="online-count">3 New</span>
+                                    <?php if( $heading = get_field( 'news_heading', 'options' ) ): ?>
+                                    <a href="<?php echo $heading['url']; ?>" target="<?php echo $heading['target']; ?>">
+                                        <span class="online-tittle"><?php echo $heading['title']; ?></span>
+                                    </a>
+                                    <?php endif; ?>
+                                    <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'news_tag', 'o' => 'o', 't' => 'span', 'tc' => 'online-count' ) ); ?>
                                 </div>
                                 <div class="header-btn d-none d-md-flex">
-                                    <a href="#" class="btn _out">Apply</a>
-                                    <a href="#" class="btn">Give</a>
+                                    <?php get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'news_apply_cta', 'o' => 'o', 'c' => 'btn _out' ) ); ?>
+                                    <?php get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'news_give_cta', 'o' => 'o', 'c' => 'btn' ) ); ?>
                                 </div>
-                                <ul class="header-top-list d-none d-md-flex">
-                                    <li><a href="#">ALUMNI</a></li>
-                                    <li><a href="#">LIBRARY</a></li>
-                                    <li><a href="#">STUDENTS</a></li>
-                                    <li><a href="#">POPULI</a></li>
-                                    <li><a href="#">FACULTY</a></li>
-                                    <li><a href="#">CONTACT</a></li>
-                                </ul>
+                                <?php if( have_rows( 'top_bar_links', 'options' ) ): ?>
+                                    <ul class="header-top-list d-none d-md-flex">
+                                    <?php while( have_rows( 'top_bar_links', 'options' ) ): the_row( ); 
+										get_template_part_args( 'templates/content-modules-cta', array( 'v' => 'link', 'w' => 'li' ) );
+									endwhile; ?>
+                                    </ul>
+                                <?php endif; ?>
                             </div>
                             <div class="header-nav-holder header-sub-mob">
                                 <button class="header-search-btn-mob nav-search arrows-back"> Back </button>
@@ -137,12 +73,12 @@
                                     <div class="header-search-btn-mob">
                                         <i class="icon-m-search"></i>Search
                                     </div>
-                                    <form action="#">
+                                    <form id="searchform" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>" autocomplete="off">
                                         <label class="filter-results-label">
-                                            <input type="text" placeholder="Search the Site...">
+                                            <input class="search-field" type="text" name="s" placeholder="Search the Site..." autocomplete="off">
                                         </label>
                                         <div class="header-btn">
-                                            <button class="btn">Search</button>
+                                            <button type="submit" class="btn">Search</button>
                                         </div>
                                     </form>
                                 </div>
@@ -169,10 +105,10 @@
                             <div class="header-search-block">
                                 <button class="header-search-btn">
                                     <i class="icon-m-search"></i>Search </button>
-                                <div class="header-search">
-                                    <input type="text" placeholder="Search the Site...">
+                                <form class="header-search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>" autocomplete="off">
+                                    <input class="search-field" type="text" name="s" placeholder="Search the Site..." autocomplete="off">
                                     <input type="submit" value="">
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>

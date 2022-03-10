@@ -372,3 +372,19 @@
 main > .breadcrumb:first-child {
   margin-top: 100px;
 }
+
+.page-template-blog #frm_form_5_container .frm_fields_container {
+  display: flex;
+  align-items: center;
+}
+.page-template-blog #frm_form_5_container .frm_form_field {
+  width: 100%;
+}
+.page-template-blog #frm_form_5_container button[type=submit] {
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+  color: white;
+}
+.page-template-blog #frm_form_5_container button[type=submit]:hover {
+  background-color: transparent;
+}

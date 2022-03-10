@@ -324,7 +324,7 @@ get_header(); ?>
         </section>
     <?php elseif( get_row_layout() == 'full_banner' ): ?>
         <section class="py-3 py-md-10 p-r text-white mh-58 a-center">
-            <?php if( get_sub_field( 'background' ) ): ?>
+            <?php if( get_sub_field( 'video' ) ): ?>
                 <?php get_template_part_args( 'templates/content-modules-video', array( 'v' => 'video', 'w' => 'div', 'wc' => 'bg-str-f bg-dark-o' ) ); ?>
             <?php else: ?>
                 <?php get_template_part_args( 'templates/content-modules-image', array( 'v' => 'background', 'w' => 'div', 'wc' => 'bg-str-f bg-dark-o', 'is' => false, 'v2x' => false ) ); ?>

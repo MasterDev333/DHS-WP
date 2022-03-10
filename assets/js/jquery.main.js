@@ -184,7 +184,7 @@ function initFixedScrollBlock() {
 // initialize smooth anchor links
 function initAnchors() {
 	new SmoothScroll({
-		anchorLinks: 'a[href^="#"]:not([href="#"]), .anchor-link, .jcf-option-anchor-link',
+		anchorLinks: 'a[href^="#"]:not([href="#"]):not([href^="#tab"]), .anchor-link, .jcf-option-anchor-link',
 		extraOffset: 0,
 		activeClasses: 'link',
 		wheelBehavior: 'none'
