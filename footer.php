@@ -20,7 +20,11 @@
 					</div>
 					<?php endif; ?>
 					<div class="online">
-						<?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'news_heading', 'o' => 'o', 't' => 'span', 'tc' => 'online-tittle' ) ); ?>
+						<?php if( $heading = get_field( 'news_heading', 'options' ) ): ?>
+							<a href="<?php echo $heading['url']; ?>" target="<?php echo $heading['target']; ?>">
+								<span class="online-tittle"><?php echo $heading['title']; ?></span>
+							</a>
+						<?php endif; ?>
 						<?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'news_tag', 'o' => 'o', 't' => 'span', 'tc' => 'online-count' ) ); ?>
 					</div>
 					<div class="footer-btns">

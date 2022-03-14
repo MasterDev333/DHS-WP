@@ -462,6 +462,31 @@ get_header(); ?>
                 <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'content', 't' => 'div' ) ); ?>
             </div>
         </section>
+    
+    <?php elseif( get_row_layout() == 'form' ): ?>
+        <?php 
+        if( !get_sub_field( 'remove_margin_top' ) ) {
+            $class[] = 'mt-7';
+        }
+        if( !get_sub_field( 'remove_margin_bottom' ) ) {
+            $class[] = 'mb-12';
+        } ?>
+        <section class="<?php echo implode( ' ', $class ); ?>">
+            <div class="container">
+                <div class="peoples-grid">
+                    <div>
+                        <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'heading', 't' => 'h2', 'tc' => 'h-over' ) ); ?>
+                    </div>
+                    <?php if( $form = get_sub_field('form') ): ?>
+                    <div>
+                        <div class="peoples-form bg-l-gray">
+                            <?php echo do_shortcode( $form ); ?>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </section>
     <?php endif; ?> 
 <?php endwhile;
 endif; ?>
