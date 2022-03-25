@@ -388,3 +388,24 @@ main > .breadcrumb:first-child {
 .page-template-blog #frm_form_5_container button[type=submit]:hover {
   background-color: transparent;
 }
+.section-anchor ul,
+.section-anchor ol,
+.simple-content ul,
+.simple-content ol {
+  padding-left: 20px;
+}
+.section-anchor li,
+.simple-content li {
+  list-style: disc;
+}
+.section-anchor li li,
+.simple-content li li {
+  list-style: circle;
+}
+
+.block-info-list {
+  padding: 0 !important;
+}
+.block-info-list li {
+  list-style: none !important;
+}

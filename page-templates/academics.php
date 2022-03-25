@@ -166,7 +166,7 @@ $post_slug = $post->post_name;
             </div>
         </section>
     <?php elseif( get_row_layout() == 'custom_content' ): ?>
-        <section class="pt-12 pb-7 pb-md-10">
+        <section class="simple-content pt-12 pb-7 pb-md-10">
             <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'content', 'w' => 'div', 'wc' => 'container _s' ) ); ?>
         </section>
     <?php elseif( get_row_layout() == 'post_slider_banner' ): ?>

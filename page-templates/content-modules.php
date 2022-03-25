@@ -456,7 +456,7 @@ get_header(); ?>
         if( !get_sub_field( 'remove_margin_bottom' ) ) {
             $class[] = 'mb-10';
         } ?>
-        <section class="<?php echo implode( ' ', $class ); ?>">
+        <section class="simple-content <?php echo implode( ' ', $class ); ?>">
             <div class="container">
                 <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'heading', 't' => 'h2' ) ); ?>
                 <?php get_template_part_args( 'templates/content-modules-text', array( 'v' => 'content', 't' => 'div' ) ); ?>
